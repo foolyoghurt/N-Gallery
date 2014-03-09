@@ -1,0 +1,16 @@
+{
+	"首页": "Home",
+	"全选": "Select All",
+	"反选": "Reverse",
+	"全部取消": "Cancel All",
+	"删除选中项": "Delete Selected",
+	"更改": "Change",
+	"添加": "Add",
+	"启动多选模式": "Start MultiSelect",
+	"取消多选模式": "Stop MultiSelect",
+	"跳转": "Jump To",
+	"输入相册根目录": "Input album base dir",
+	"(N:M)跳转到M页第N张图片": "(N:M)Jump to Nth page Mth pic",
+	"Contains sub folders": "Contains sub folders",
+	"Delete Confirmation": "Delete Confirmation"
+}

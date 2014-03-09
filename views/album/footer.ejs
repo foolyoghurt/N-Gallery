@@ -1,0 +1,207 @@
+<!-- Modal -->
+<div class="modal fade" id="delete-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title" id="myModalLabel"><%= __('Delete Confirmation') %></h4>
+            </div>
+            <div class="modal-body">
+                <%= __('Delete Confirmation') %>？
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                <button id="delete-OK" type="button" class="btn btn-primary">OK</button>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+</body>
+<script src="/javascripts/jquery-1.10.2.min.js"></script>
+<script src="/javascripts/jquery.hotkeys.js"></script>
+<script src="/bs3/js/bootstrap.min.js"></script>
+<script src="/javascripts/song.js"></script>
+<script>
+$(function () {
+
+    // 显示图片属性信息
+    $('.img-meta a').click(function(e) {
+        $(this).next('.img-metabg').toggleClass('img-metabg-open');
+        e.preventDefault();
+        e.stopPropagation();
+    });
+
+    var selector = {
+        'item': '.img-item img',
+        'wrapper': '.img-item',
+        'selected_class': 'item-selected',
+        'del_pop': '#del-selected>a',
+        'badge_selected': '#selected-badge',
+        'badge_total': '#item-count-badge'
+    };
+    var selectItems = new SelectItems(selector, 'pic');
+
+    var operationSelector = {
+        select_one: '.img-item',
+        select_reverse: '#reverse-selected',
+        select_all: '#all-selected',
+        select_all_cancel: '#cancel-selected',
+        select_delete: '#del-selected',
+        select_delete_modal: '#delete-modal',
+        select_delete_one: '.img-opr'
+    };
+    selectItems.bindOperation(operationSelector);
+    selectItems.bindHotKeys();
+    $(document).on('deleteSelectSuccess',function (e) {
+        itemScroll.refresh();
+        $('#delete-modal').modal('hide');
+        
+    }).on('deleteSelectFail', function (e) {
+        $('#delete-modal').modal('hide');
+    }).on('deleteOneSuccess', function () {
+        // 由于删除特效hide有延时
+        setTimeout(function() { itemScroll.refresh(); }, 550);
+    });
+
+    // 显示图片操作按钮
+    $('.img-item').hover(function () {
+        var $this = $(this);
+        $this.find('.img-opr').show();
+        $this.find('.img-metabg-sign').show();
+    }, function () {
+        var $this = $(this);
+        $this.find('.img-opr').hide();
+        $this.find('.img-metabg-sign').hide();
+    });
+
+    // zoom in/out
+    $('#zoom-in').click(function (e) {
+        var width = parseInt($('.img-item').css('width')) * 1.1 + 'px';
+        $('.img-item').css({width: width});
+        $('.img-item img').css({width: width});
+        e.preventDefault();
+    });
+    $('#zoom-out').click(function (e) {
+        var width = parseInt($('.img-item').css('width')) / 1.1 + 'px';
+        $('.img-item').css({width: width});
+        $('.img-item img').css({width: width});
+        e.preventDefault();
+    });
+
+
+    // 计数牌，显示当前屏幕所对应的图片时第几张
+    var itemScroll = new ItemScroll({
+        selector: selector.item,
+        badge_sel: '#img-nav-board',
+        margin: 30
+    });
+
+    // 必须等图片加载完毕后才能执行refresh，否则offset属性不可获取
+    $(window).load(function () {
+        itemScroll.refresh();
+    });
+    $(document).scroll(function () {
+        itemScroll.process();
+    });
+
+    $('#img-nav').hover(function () {
+        $(this).children('.nav').show();
+    },
+    function () {
+        $(this).children('.nav').hide();
+    });
+    // 初始化页号
+    var pn = location.search.match(/pn=(\d+)/);
+    pn = pn ? pn[1] : 1;
+    $('#img-nav-pn').text(pn);
+    // 跳转到上一张图片
+    $('#img-nav-pre').click(function (e) {
+        itemScroll.scrollN(-1);
+        e.preventDefault();
+    });
+    // 下一张
+    $('#img-nav-next').click(function (e) {
+        itemScroll.scrollN(1);
+        e.preventDefault();
+    });
+
+    var hotKeys = [
+        'up',
+        'down',
+        'ctrl+left',
+        'ctrl+right'
+    ];
+    $(document).bind('keydown', hotKeys[0], function() {
+        $('#img-nav-pre').click();
+    }).bind('keydown', hotKeys[1], function() {
+        $('#img-nav-next').click();
+    }).bind('keydown', hotKeys[2], function() {
+        var curPageNum = +$('.pagination > .active > a').text();
+        if (curPageNum <= 1) { return; }
+        var redirectUrl = location.origin + location.pathname + '?pn=' + (curPageNum - 1);
+        location.assign(redirectUrl);
+    }).bind('keydown', hotKeys[3], function() {
+        var curPageNum = +$('.pagination > .active > a').text();
+        var maxPageNum = +$('.pagination li:last a').attr('href').split('pn=')[1];
+        if (maxPageNum <= curPageNum) { return; }
+        var redirectUrl = location.origin + location.pathname + '?pn=' + (curPageNum + 1);
+        location.assign(redirectUrl);
+    });
+
+    // 跳转到第N张图片
+    $("#jump-to-item button").click(function (e) {
+        e.preventDefault();
+
+        var popEle = "#jump-to-item input",
+                vals = $(popEle).val().split(':'),
+                hasError = false,
+                pnMax = +$('.pagination li:last a').attr('href').split('pn=')[1];
+
+
+        if (vals.length == 2) {
+            var pn = parseInt(vals[0]),
+                    num = +vals[1];
+
+            if (!isNaN(pn) && pn <= pnMax && pn >= 1) {
+                var redirectUrl = location.origin + location.pathname + '?pn=' + pn + '#pic' + (num - 1);
+                location.assign(redirectUrl);
+                return;
+            } else {
+                hasError = true;
+            }
+
+        } else {
+            var num = +vals[0];
+        }
+        if (hasError || itemScroll.scrollToN(num) === false) {
+            var $pop = $(popEle);
+            $pop.attr({
+                'data-content': '页数范围: ' + '1-' + pnMax + '  图片数范围: ' + '1-' + selectItems.itemTotal,
+                'data-placement': "bottom"
+            }).popover('show');
+
+            setTimeout(function () {
+                $pop.popover('destroy')
+            }, 2500);
+        }
+    });
+
+    // get top
+    $('.get-top .up').click(function() {
+        e.preventDefault();
+        $(document).scrollTop(0);
+    });
+    $('.get-top .down').click(function(e) {
+        e.preventDefault();
+        $(document).scrollTop($(document).height());
+    });
+
+    // Help Document
+    $('.help').click(function(e) {
+        e.preventDefault();
+        $(this).toggleClass('open');
+    });
+
+});
+</script>
+</html>

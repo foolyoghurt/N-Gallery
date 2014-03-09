@@ -1,0 +1,45 @@
+<div class="img-item">
+    <div class="img-meta">
+        <a href="#" class="img-metabg-sign"><span class="glyphicon glyphicon-info-sign"></span></a>
+
+        <div class="img-metabg">
+            <table>
+                <tbody>
+                <tr>
+                    <th>路径</th>
+                    <td><%= item['src'] %></td>
+                </tr>
+                <tr>
+                    <th>尺寸</th>
+                    <td><%= item['width'] %> x <%= item['height'] %></td>
+                </tr>
+                <tr>
+                    <th>大小</th>
+                    <td><%= item['size'] %></td>
+                </tr>
+                <tr>
+                    <th>创建时间</th>
+                    <td><%= item['ctime'] %></td>
+                </tr>
+                <tr>
+                    <th>修改时间</th>
+                    <td><%= item['mtime'] %></td>
+                </tr>
+                <tr>
+                    <th>访问时间</th>
+                    <td><%= item['atime'] %></td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <a href="#" class="img">
+        <div class="img-wrapper">
+            <img src="/<%= item['src'] %>" id="<%= 'pic' + i %>"
+                 data-width="<%= item['width'] %>" data-height="<%= item['height'] %>"
+                 data-original-title="操作"/>
+        </div>
+    </a>
+    <button type="button" class="img-opr btn btn-danger btn-lg"><span class="glyphicon glyphicon-trash"></span>
+    </button>
+</div>

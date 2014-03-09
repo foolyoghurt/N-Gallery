@@ -1,0 +1,172 @@
+</div>
+<div class="woo-pager"></div>
+</div>
+
+</div>
+<!-- Woo holder over -->
+
+</div>
+<!-- Modal -->
+<div class="modal fade" id="delete-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title" id="myModalLabel"><%= __('Delete Confirmation') %></h4>
+            </div>
+            <div class="modal-body">
+                <%= __('Delete Confirmation') %>？
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                <button id="delete-OK" type="button" class="btn btn-primary">OK</button>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+
+<script src="/javascripts/jquery-1.10.2.min.js"></script>
+<script src="/javascripts/jquery.hotkeys.js"></script>
+<script src="/waterfall/js/tabswitch.js"></script>
+<script src="/waterfall/js/woo.js"></script>
+<script src="/bs3/js/bootstrap.min.js"></script>
+<script src="/javascripts/song.js"></script>
+<script>
+    var global = this;
+    $(function (){
+        // 单选或多选
+        var selector = {
+            'item':             '.woo img',
+            'wrapper':          '.woo',
+            'selected_class':   'item-selected',
+            'del_pop':          '#del-selected>a',
+            'badge_selected':   '#selected-badge',
+            'badge_total':      '#item-count-badge'
+        };
+        var selectItems = new SelectItems(selector, 'album');
+
+        var operationSelector = {
+            select_reverse: '#reverse-selected',
+            select_all: '#all-selected',
+            select_all_cancel: '#cancel-selected',
+            select_delete_modal: '#delete-modal',
+            select_delete: '#del-selected'
+        };
+        selectItems.bindOperation(operationSelector);
+        selectItems.bindHotKeys();
+        $(document).on('deleteSelectSuccess', function (e) {
+            $('#delete-modal').modal('hide');
+        }).on('deleteSelectFail', function (e) {
+            $('#delete-modal').modal('hide');
+        });
+
+        // 启动/取消多选模式
+        var flag_ms = true;
+        $("#multi-select").click(function(e){
+            if (flag_ms) {
+                $(selector.item).click(function(e) {
+                    selectItems.selectOne(this, e.shiftKey);
+                    e.preventDefault();
+                });
+                $(this).text('<%= __('取消多选模式') %>');
+                flag_ms = !flag_ms;
+            } else {
+                $(selector.item).unbind('click');
+                selectItems.cancelAllSelect();
+                $(this).text('<%= __('启动多选模式') %>');
+                flag_ms = !flag_ms;
+            }
+            e.preventDefault();
+        });
+
+        // 提示确认删除
+        $('#del-selected').click(function(e){
+            e.preventDefault();
+
+            var albums_path_html = '',
+                folder_alert_html = '<span class="alert-danger" style="padding: 5px;margin-left: 20px;"><%= __('Contains sub folders') %></span>';
+
+            selectItems.itemSelected.forEach(function(id) {
+                var href = $('#' + selectItems.id_prefix + id).closest('.cover').attr('href');
+                var pos = href.indexOf('/', 1);
+                albums_path_html += '<p><span class="delete-modal-warn">'
+                        + href.slice(pos + 1)
+                        + '</span>'
+                        + (href.slice(1, pos) == 'folder' ? folder_alert_html : '')
+                        + '</p>';
+            });
+            $('#delete-modal .modal-body').html(albums_path_html);
+            $('#delete-modal').modal();
+        });
+
+        // 改变相册根目录
+        $("#chg-album-root #chg").click(function(event) {
+            var root = $("#chg-album-root input").val();
+            $.get('/operationHandler', {album_base_dir: root, mode: 'set-path'}, function(data) {
+                if (data.status == 'OK') {
+                    location.reload();
+                } else {
+                    var pop = $('#chg-album-root input');
+                    pop.attr({'data-content': data.msg, 'data-placement': "bottom"});
+                    pop.popover('show');
+                    setTimeout(function(){pop.popover('destroy')}, 2500);
+                }
+            })
+            event.preventDefault();
+        })
+        // 添加相册根目录
+        $("#chg-album-root #add").click(function(event) {
+            var root = $("#chg-album-root input").val();
+            $.get('/operationHandler', {album_base_dir: root, mode: 'add-path'}, function(data) {
+                if (data.status == 'OK') {
+                    location.reload();
+                } else {
+                    var pop = $('#chg-album-root input');
+                    pop.attr({'data-content': data.msg, 'data-placement': "bottom"});
+                    pop.popover('show');
+                    setTimeout(function(){pop.popover('destroy')}, 2500);
+                }
+            })
+            event.preventDefault();
+        })
+
+        $('#chg-album-root input').keydown(function(event) {
+            if (event.keyCode == 13) {  // enter
+                $('#chg-album-root #chg').click();
+                event.preventDefault();
+            }
+        });
+
+        var hotKeys = [
+            'ctrl+shift+m'
+        ];
+        $(document).bind('keydown', hotKeys[0], function() {
+            $('#multi-select').click();
+        });
+
+        // Help Document
+        $('.help').click(function(e) {
+            e.preventDefault();
+            $(this).toggleClass('open');
+        });
+
+        var conf = {
+            "arrform" : ['collect'],
+            "arrsplit" : '',            // The extend width of each common column including margin between two cols.
+            "arrmasnw" : 275,           // col width including margin
+            "arrmargin" : 21,
+            "arrfmasnw" : 0,            // The gap between units in one column.
+            "arrgap" : 0,
+
+            "resize" : true,
+            "onScroll" : function (tp){
+            }
+        };
+        $.Woo(conf);
+        
+        // transition when deleting items
+        $('.woo').css('transition', 'top .3s ease-in-out, left .3s ease-in-out');
+    });
+</script>
+</body>
+</html>

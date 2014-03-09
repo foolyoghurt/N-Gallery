@@ -1,0 +1,21 @@
+<div class="breadcrumb">
+    <% var basePath = breadcrumb.base_path %>
+    <% var baseUrl = breadcrumb.base_url %>
+    <% var pathNodes = breadcrumb.path_nodes %>
+    <span class="base-path">
+        <a href="<%= baseUrl %>">
+            <span><%= basePath %></span>
+        </a>
+    </span>
+    <span class="separator">/</span>
+    <% for (var i = 0; i < pathNodes.length - 1; i++) { %>
+    <% var node = pathNodes[i] %>
+    <span class="mid-path">
+        <a href="<%= node.url %>">
+            <span><%= node.name %></span>
+        </a>
+    </span>
+    <span class="separator">/</span>
+    <% } %>
+    <span class="final-path"><%= pathNodes[i].name %></span>
+</div> 

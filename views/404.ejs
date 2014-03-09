@@ -1,0 +1,31 @@
+<!DOCTYPE>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title><%= content %></title>
+    <link href="/css/404.css" rel="stylesheet" type="text/css"/>
+    <link rel="stylesheet" href="/bs3/css/bootstrap.min.css"/>
+    <link href="/images/favicon.png" rel="shortcut icon" type='image/vnd.microsoft.icon'/>
+</head>
+<body>
+<!-- header end -->
+<div class="container error-404">
+    <div id="main" class="center-block">
+        <div class="content"><%= content %></div>
+        <div>
+            <a href="/" class="btn btn-info btn-lg">Home</a>
+            <a id="go_back" class="btn btn-info btn-lg">Go Back</a>
+        </div>
+        </di>
+    </div>
+</div>
+</body>
+<script>
+    window.onload = function() {
+        document.getElementById('go_back').onclick = function() {
+            window.history.back();
+        };
+        return false;
+    };
+</script>
+</html>

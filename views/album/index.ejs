@@ -1,0 +1,23 @@
+<% include header.ejs %>
+<% for (var i = 0; i < items.length; i++) { %>
+<% var item = items[i]; %>
+<% include item.ejs %>
+<% } %>
+</div>
+<!-- end of #album-container -->
+
+<!-- pagination -->
+<div class="container">
+    <ul class="pagination">
+        <li><a href="<%= url %>" class="first">&laquo;</a></li>
+        <% for (var i = 1; i <= page.total; i++) { %>
+        <li<%= page.number == i ? ' class=active' : '' %>><a href="<%= url + '?pn=' + i %>"><%= i %></a></li>
+        <% } %>
+        <li><a href="<%= url + '?pn=' + page.total %>" class="last">&raquo;</a></li>
+    </ul>
+</div>
+<div class="get-top">
+    <a href="#" class="up"><span class="glyphicon glyphicon-chevron-up"></span></a>
+    <a href="#" class="down"><span class="glyphicon glyphicon-chevron-down"></span></a>
+</div>
+<% include footer.ejs %>

@@ -1,0 +1,134 @@
+h1 {
+  text-transform: capitalize;
+}
+nav .help i {
+  font-size: 1.4em;
+}
+nav .help .dropdown-menu {
+  padding: 0 15px;
+  width: 330px;
+  height: 550px;
+  text-overflow: ellipsis;
+  overflow: auto;
+}
+nav .help .dropdown-menu .doc {
+  position: relative;
+  overflow-y: auto;
+  overflow-x: hidden;
+  padding-right: 20px;
+  margin-right: -20px;
+  width: 330px;
+}
+span.delete-modal-warn {
+  -webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
+  -o-border-radius: 3px;
+  border-radius: 3px;
+  padding: 3px 10px;
+  background: #f0f0f0;
+}
+.item-selected {
+  opacity: 0.5;
+}
+.get-top {
+  position: fixed;
+  right: 30px;
+  bottom: 20px;
+}
+.get-top .glyphicon {
+  dispaly: inline-block;
+  font-size: 1.5em;
+}
+/* loading */
+.woo-loading {
+  height: 40px;
+  background: url("http://cdn.duitang.com/uploads/people/201307/30/20130730175612_KU2dF.gif") center 12px no-repeat;
+}
+/* woo-pcont 为空节点时，ie6 ie7下，节点的高度不为0 */
+.woo-pcont {
+  height: 0;
+}
+/* masn 生效前设置不可见 */
+.woo-masned {
+  zoom: 1;
+  overflow: hidden;
+  visibility: hidden;
+  margin-left: auto;
+  margin-right: auto;
+/* woo 基本单元块，初始状态不可见 */
+}
+.woo-masned .woo {
+  position: absolute;
+  top: -6000px;
+}
+#index-container {
+  margin-top: 70px;
+}
+.img-wrapper-selected {
+  background: url("/images/ok.png") center no-repeat;
+  background-size: 70%;
+}
+.woo {
+  width: 250px;
+  margin: 0 21px 20px 0;
+  padding-bottom: 1px;
+  -webkit-box-shadow: 3px 3px 2px rgba(0,0,0,0.1);
+  -moz-box-shadow: 3px 3px 2px rgba(0,0,0,0.1);
+  -o-box-shadow: 3px 3px 2px rgba(0,0,0,0.1);
+  box-shadow: 3px 3px 2px rgba(0,0,0,0.1);
+}
+.woo a {
+  text-decoration: none;
+}
+.woo a:hover {
+  text-decoration: none;
+}
+.woo img {
+  border-bottom: 1px solid #ddd;
+  -webkit-transition: opacity 0.3s ease;
+  -moz-transition: opacity 0.3s ease;
+  -o-transition: opacity 0.3s ease;
+  transition: opacity 0.3s ease;
+}
+.woo img:hover {
+  opacity: 0.7;
+}
+.woo .j {
+  border: 1px solid #ddd;
+  border-right: 0;
+  background: #fff;
+}
+.woo .row {
+  display: table-row;
+  width: 100%;
+}
+.woo .row div {
+  padding: 10px;
+  text-align: center;
+  vertical-align: middle;
+}
+.woo .row span {
+  color: #888;
+}
+.woo .glyphicon {
+  margin-right: 5px;
+}
+.row .cell-title {
+  display: table-cell;
+  width: 73%;
+}
+.row .cell-count {
+  display: table-cell;
+  width: 27%;
+  border-left: 1px solid #ddd;
+}
+.breadcrumb {
+  font-size: 1.2em;
+}
+.breadcrumb a {
+  color: #4183c4;
+}
+.breadcrumb .base-path,
+.breadcrumb .final-path {
+  font-weight: bold;
+}

@@ -1,0 +1,22 @@
+<!DOCTYPE>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title><%= title %></title>
+    <!--<link href="/css/style.css" rel="stylesheet" type="text/css"/>-->
+    <link href="/bs3/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
+    <link href="/css/album.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="album-container">
+    <header id="header">
+        <% include ../album/navibar.ejs %>
+    </header>
+    <!-- header end -->
+    <div id="img-nav">
+        <div id="img-nav-pn"></div>
+        <div id="img-nav-pre" class="nav" style="display: none;"></div>
+        <div id="img-nav-board">1</div>
+        <div id="img-nav-next" class="nav" style="display: none;"></div>
+    </div>
+    <h1><%= title %></h1>
