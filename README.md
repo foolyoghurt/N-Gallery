@@ -1,6 +1,6 @@
 # N-Gallery
 
-A web photo gallery and picture viewer/browser using local image directory, powered by Node.js  
+A web photo gallery and picture viewer/browser using local image directory, powered by Node.js ([Demo Website](http://foolyoghurt.github.io/projects/n-gallery/demo/) 
 （中文文档见下文）
 
 ## Features
@@ -100,7 +100,7 @@ If specified directory **doesn't have subfolders**, so a gallery is displayed di
 
 # N-Gallery
 
-一个基于Node.js的网页图片浏览器，利用本地图片文件夹生成网页
+一个基于Node.js的网页图片浏览器，利用本地图片文件夹生成网页 ([示例网站](http://foolyoghurt.github.io/projects/n-gallery/demo/) 
 
 ## 特性
 1. List pictures of a gallery fast and with beautiful web page
