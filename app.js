@@ -11,6 +11,7 @@ var path = require('path');
 var stylus = require('stylus');
 var i18n = require('i18n');
 var fs = require('fs');
+var fsPlus = require('./lib/fs-plus');
 var conf = require('./lib/config');
 var log = require('./lib/logger');
 var app = express();
@@ -65,13 +66,26 @@ exports.run = function (port) {
   conf.album_base_dirs.forEach(function(dir, i, arr) {
     if (!fs.existsSync(dir)) {
       arr[i] = undefined;
-      log(dir + ' is not a valid path', 'error');
+      log('Gallery Base Directory "' + dir + '" is not a valid path', 'warn');
     } else {
       arr[i] = arr[i].replace(/\\/g, '/').replace(/\/$/, '');
     }
   });
   conf.album_base_dirs = conf.album_base_dirs.filter(function(dir) { return dir; });
-  log('Album Base Directory: ' + conf.album_base_dirs, 'info');
+  if (conf.album_base_dirs.length) {
+    log('Gallery Base Directory: ' + conf.album_base_dirs, 'info');
+  } else {
+    log('Not Any Valid Gallery Base Directories Specified', 'error');
+  }
+  
+  // Check tmp dir in "mv" delete mode
+  if (conf.delete_mode == 'mv') {
+    if (!fs.existsSync(conf.tmp_dir)) {
+      log('Tmp Directory "' + conf.tmp_dir + '" Not Exists', 'error');
+    } else if (!fsPlus.isWritableSync(conf.tmp_dir)) {
+      log('Tmp Directory "' + conf.tmp_dir + '" Not Writable', 'error');
+    }
+  }
   
   http.createServer(app).listen(port, function () {
     console.log('Express server listening on port ' + port);

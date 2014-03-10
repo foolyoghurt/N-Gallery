@@ -43,12 +43,22 @@ or
 $ n-gallery -f /tmp/pic/img-dirs.txt
 
 // /tmp/pic/img-dirs.txt
-
+/tmp/pic/G1
+/tmp/pic/G2
+/tmp/pic/G3
 ```
+
 Open generated website in default browser immediately. `-b` should be specified at last
 ```
 $ n-gallery /tmp/pic/G1 -b
 ```
+
+If you don't want to use the global `n-gallery` command to run, you can use `index.js` as the program entry. For example
+```
+n-gallery_home_path$ node index.js
+n-gallery_home_path$ supervisor index.js
+```
+
 ### Configuration
 In the `lib/config.js` file, you can specify the server port number, image directory and so on. `album_base_dirs` must be specified for image directories unless you specify it from terminal command everry time
 ```
@@ -83,7 +93,7 @@ Delete the images in the selected subfolders
 
 ![Delete selected](http://ww4.sinaimg.cn/mw690/6313f233tw1ee6id0z65wj20vi0h1775.jpg)
 
-If specified directory **doesn't have subfolders**, so an image gallery is displayed directly  
+If specified directory **doesn't have subfolders**, so a gallery is displayed directly  
 
 ![gallery](http://ww3.sinaimg.cn/mw690/6313f233tw1ee6icxly0wj21hc0plq8p.jpg)
 
@@ -107,6 +117,7 @@ If specified directory **doesn't have subfolders**, so an image gallery is displ
 6. Dynamically set or add the gallery directories
 7. Zome in/out to display images
 8. Smooth experience
+
 ## 快速向导 
 ### 安装
 ```
@@ -129,12 +140,23 @@ $ n-gallery --file=/tmp/pic/img-dirs.txt
 $ n-gallery -f /tmp/pic/img-dirs.txt
 
 // /tmp/pic/img-dirs.txt
-
+/tmp/pic/G1
+/tmp/pic/G2
+/tmp/pic/G3
 ```
+
 在输入完命令后，马上在默认浏览器中运行生成的网页。`-b` 参数应该在命令的最后指定
 ```
 $ n-gallery /tmp/pic/G1 -b
 ```
+
+If you don't want to use the global `n-gallery` command to run, you can use `index.js` as the program entry. For example
+如果不想使用全局的`n-gallery`命令运行程序，可以用`index.js`作为程序入口，例如
+```
+n-gallery_home_path$ node index.js
+n-gallery_home_path$ supervisor index.js
+```
+
 ### 配置
 在`lib/config.js`文件里，可以设置端口号、图片目录等。其中`album_base_dirs`必须设置，除非每次在终端运行命令的时候用参数指定
 ```
