@@ -39,20 +39,6 @@ span.delete-modal-warn {
   dispaly: inline-block;
   font-size: 1.5em;
 }
-.not-writable .row {
-  background: #fcf9e8;
-}
-.not-writable .glyphicon-warning-sign {
-  color: #a94442 !important;
-}
-.not-writable h1 {
-  color: #a94442;
-  background-color: #f2dede !important;
-  border-color: #ebccd1;
-}
-.not-writable h1 span {
-  font-size: 0.3em;
-}
 /* loading */
 .woo-loading {
   height: 40px;
@@ -79,7 +65,7 @@ span.delete-modal-warn {
   margin-top: 70px;
 }
 .img-wrapper-selected {
-  background: url("/images/ok.png") center no-repeat;
+  background: url("../images/ok.png") center no-repeat;
   background-size: 70%;
 }
 .woo {
@@ -145,4 +131,10 @@ span.delete-modal-warn {
 .breadcrumb .base-path,
 .breadcrumb .final-path {
   font-weight: bold;
+}
+.not-writable .row {
+    background: #fcf9e8;
+}
+.not-writable .glyphicon-warning-sign {
+    color: #a94442 !important;
 }

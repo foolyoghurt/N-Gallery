@@ -46,9 +46,11 @@ $(function () {
         select_reverse: '#reverse-selected',
         select_all: '#all-selected',
         select_all_cancel: '#cancel-selected',
+        <% if(is_writable) { %>
         select_delete: '#del-selected',
         select_delete_modal: '#delete-modal',
         select_delete_one: '.img-opr'
+        <% } %>
     };
     selectItems.bindOperation(operationSelector);
     selectItems.bindHotKeys();

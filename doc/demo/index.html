@@ -1,0 +1,491 @@
+
+<!DOCTYPE>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title>Home</title>
+    <link href="public/css/index.css" rel="stylesheet" type="text/css"/>
+    <link rel="stylesheet" href="public/bs3/css/bootstrap.min.css"/>
+    <link href="public/images/favicon.png" rel="shortcut icon" type='image/vnd.microsoft.icon' />
+
+</head>
+<body>
+<nav class="navbar navbar-fixed-top navbar-inverse" role="navigation">
+    <!-- Brand and toggle get grouped for better mobile display -->
+    <div class="navbar-header">
+        <a class="navbar-brand" href="#">N-Gallery</a>
+    </div>
+
+    <!-- Collect the nav links, forms, and other content for toggling -->
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+        <ul class="nav navbar-nav">
+            <li class="active"><a href="/">Home</a></li>
+            <li id="del-selected"><a href="#" data-placement="bottom" data-content="Delete Success">Delete Selected
+                <span id="selected-badge" class="badge" style="margin-left: 10px">0</span></a></li>
+            <li id="reverse-selected"><a href="#">Reverse</a></li>
+            <li id="all-selected"><a href="#">Select All
+                <span id="item-count-badge" class="badge" style="margin-left: 10px">9</span></a></li>
+            <li id="cancel-selected"><a href="#">Cancel All</a></li>
+        </ul>
+        <ul class="nav navbar-nav navbar-right" style="padding-right: 10px">
+            <li class="help">
+                <a href="#"><i class="glyphicon glyphicon-question-sign"></i></a>
+                <div class="dropdown-menu">
+                    <h3>/album/</h3>
+
+                    <h4>快捷键</h4>
+
+                    <p><code>Up</code>/<code>Down</code> : 上一张/下一张<br/><code>Ctrl</code> + <code>Left/Right</code> : 上一页/下一页<br/><code>Ctrl</code> + <code>A</code> : 全选<br/><code>Ctrl</code> + <code>R</code> : 反选<br/><code>Esc</code> : 取消所选<br/><code>Ctrl</code>+ <code>Enter</code> : 选定当前屏幕所对应的图片<br/><code>Ctrl</code> + <code>Del</code> : 删除当前屏幕所对应的图片  </p>
+
+                    <h4>跳转框</h4>
+
+                    <p>跳转到第N页的M张图片，输入N:M  </p>
+
+                    <h3>/</h3>
+
+                    <h4>快捷键</h4>
+
+                    <p><code>Ctrl</code> + <code>A</code> : 全选<br/><code>Ctrl</code> + <code>R</code> : 反选<br/><code>Esc</code> : 取消所选
+                        <code>Ctrl</code> + <code>Del</code> : 删除当前屏幕所对应的图片<br/><code>Ctrl</code> + <code>Shift</code> + <code>M</code> : 启动/取消多选模式  </p>
+
+                    <h4>多选模式</h4>
+
+                    <p>点击<code>启动多选模式</code>后，才能对相册进行选中，删除等操作，否则点击相册默认为打开相册  </p>
+
+                    <h4>切换相册根目录</h4>
+
+                    <p>点击<strong>更改</strong>将以输入的目录为根目录浏览相册<br/>点击<strong>添加</strong>将以输入的目录加上原来的目录共同为根目录浏览相册  </p>
+                </div>
+            </li>
+            <li>
+                <form id="chg-album-root" class="navbar-form navbar-left" role="search">
+                    <div class="form-group">
+                        <input type="text" class="form-control" placeholder="Input album base dir">
+                    </div>
+                    <!--<button type="submit" class="btn btn-default">确定</button>-->
+                    <div class="btn-group">
+                        <button type="button" id='chg' class="btn btn-default">Change</button>
+                        <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" style="height: 33px">
+                            <span class="caret"></span>
+                            <span class="sr-only">Toggle Dropdown</span>
+                        </button>
+                        <ul class="dropdown-menu" role="menu">
+                            <li><a href="#" id='add'>Add</a></li>
+                        </ul>
+                    </div>
+                </form>
+            </li>
+            <li style="margin-right: 15px"><button id="multi-select" class="btn btn-default navbar-btn">Start MultiSelect</button></li>
+        </ul>
+    </div><!-- /.navbar-collapse -->
+</nav>
+<!-- header end -->
+<div id="index-container">
+
+
+<div class="breadcrumb">
+        
+        
+        <span class="base-path">
+            <a href="/folder/E:/tmp/pic" target="_blank">
+                <span>E:/tmp/pic</span>
+            </a>
+        </span>
+    <span class="separator"></span>
+
+</div>
+
+<div id="woo-holder">
+<!-- When gotop button is clicked, scrollbar will be positioned where the anchor is. -->
+<a class="woo-swa" name="woo-anchor"></a>
+
+<div class="woo-swb">
+<div class="woo-pcont woo-masned my-pic">
+
+
+<div class="woo">
+    <a target=&quot;_blank&quot; class="cover" href="gallery.html">
+        <div class="j">
+            <div class="img-wrapper">
+                <img id="album0" src="gallery/cover.jpg" width="250" height="166.6015625"/>
+            </div>
+            <div class="row">
+                <div class="cell-title">
+
+                    <span>A</span>
+                </div>
+                <div class="cell-count">
+
+                    <span class="glyphicon glyphicon-picture"></span>
+
+                    <span>5</span>
+                </div>
+            </div>
+        </div>
+    </a>
+</div>
+
+
+
+<div class="woo">
+    <a target=&quot;_blank&quot; class="cover" href="gallery.html">
+        <div class="j">
+            <div class="img-wrapper">
+                <img id="album1" src="gallery/cover.jpg" width="250" height="166.6015625"/>
+            </div>
+            <div class="row">
+                <div class="cell-title">
+
+                    <span>B</span>
+                </div>
+                <div class="cell-count">
+
+                    <span class="glyphicon glyphicon-picture"></span>
+
+                    <span>5</span>
+                </div>
+            </div>
+        </div>
+    </a>
+</div>
+
+
+
+<div class="woo">
+    <a target=&quot;_blank&quot; class="cover not-writable" href="gallery-not-writable.html">
+        <div class="j">
+            <div class="img-wrapper">
+                <img id="album2" src="gallery/cover.jpg" width="250" height="166.6015625"/>
+            </div>
+            <div class="row">
+                <div class="cell-title">
+                    <span class="glyphicon glyphicon-warning-sign"></span>
+                    <span>Gallery-Not-Writable</span>
+                </div>
+                <div class="cell-count">
+                    <span class="glyphicon glyphicon-picture"></span>
+
+                    <span>5</span>
+                </div>
+            </div>
+        </div>
+    </a>
+</div>
+
+
+
+<div class="woo">
+    <a target=&quot;_blank&quot; class="cover" href="gallery.html">
+        <div class="j">
+            <div class="img-wrapper">
+                <img id="album3" src="gallery/cover.jpg" width="250" height="166.6015625"/>
+            </div>
+            <div class="row">
+                <div class="cell-title">
+
+                    <span>D</span>
+                </div>
+                <div class="cell-count">
+
+                    <span class="glyphicon glyphicon-picture"></span>
+
+                    <span>5</span>
+                </div>
+            </div>
+        </div>
+    </a>
+</div>
+
+
+
+<div class="woo">
+    <a target=&quot;_blank&quot; class="cover not-writable" href="gallery-not-writable.html">
+        <div class="j">
+            <div class="img-wrapper">
+                <img id="album4" src="gallery/cover.jpg" width="250" height="166.6015625"/>
+            </div>
+            <div class="row">
+                <div class="cell-title">
+                    <span class="glyphicon glyphicon-warning-sign"></span>
+                    <span>Gallery-Not-Writable-2</span>
+                </div>
+                <div class="cell-count">
+
+                    <span class="glyphicon glyphicon-picture"></span>
+
+                    <span>5</span>
+                </div>
+            </div>
+        </div>
+    </a>
+</div>
+
+
+
+<div class="woo">
+    <a target=&quot;_blank&quot; class="cover" href="gallery.html">
+        <div class="j">
+            <div class="img-wrapper">
+                <img id="album5" src="gallery/cover.jpg" width="250" height="166.6015625"/>
+            </div>
+            <div class="row">
+                <div class="cell-title">
+
+                    <span>F</span>
+                </div>
+                <div class="cell-count">
+
+                    <span class="glyphicon glyphicon-picture"></span>
+
+                    <span>5</span>
+                </div>
+            </div>
+        </div>
+    </a>
+</div>
+
+
+
+<div class="woo">
+    <a target=&quot;_blank&quot; class="cover" href="gallery.html">
+        <div class="j">
+            <div class="img-wrapper">
+                <img id="album6" src="gallery/cover.jpg" width="250" height="166.6015625"/>
+            </div>
+            <div class="row">
+                <div class="cell-title">
+
+                    <span>G</span>
+                </div>
+                <div class="cell-count">
+
+                    <span class="glyphicon glyphicon-picture"></span>
+
+                    <span>5</span>
+                </div>
+            </div>
+        </div>
+    </a>
+</div>
+
+
+
+<div class="woo">
+    <a target=&quot;_blank&quot; class="cover" href="gallery.html">
+        <div class="j">
+            <div class="img-wrapper">
+                <img id="album7" src="gallery/cover.jpg" width="250" height="166.6015625"/>
+            </div>
+            <div class="row">
+                <div class="cell-title">
+
+                    <span>H</span>
+                </div>
+                <div class="cell-count">
+
+                    <span class="glyphicon glyphicon-picture"></span>
+
+                    <span>5</span>
+                </div>
+            </div>
+        </div>
+    </a>
+</div>
+
+
+
+<div class="woo">
+    <a target=&quot;_blank&quot; class="cover" href="gallery.html">
+        <div class="j">
+            <div class="img-wrapper">
+                <img id="album8" src="gallery/cover.jpg" width="250" height="166.6015625"/>
+            </div>
+            <div class="row">
+                <div class="cell-title">
+
+                    <span>I</span>
+                </div>
+                <div class="cell-count">
+
+                    <span class="glyphicon glyphicon-picture"></span>
+
+                    <span>5</span>
+                </div>
+            </div>
+        </div>
+    </a>
+</div>
+
+
+</div>
+<div class="woo-pager"></div>
+</div>
+
+</div>
+<!-- Woo holder over -->
+
+</div>
+<!-- Modal -->
+<div class="modal fade" id="delete-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title" id="myModalLabel">Delete Confirmation</h4>
+            </div>
+            <div class="modal-body">
+                Delete Confirmation？
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                <button id="delete-OK" type="button" class="btn btn-primary">OK</button>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+
+<script src="public/javascripts/jquery-1.10.2.min.js"></script>
+<script src="public/javascripts/jquery.hotkeys.js"></script>
+<script src="public/waterfall/js/tabswitch.js"></script>
+<script src="public/waterfall/js/woo.js"></script>
+<script src="public/bs3/js/bootstrap.min.js"></script>
+<script src="public/javascripts/song-demo.js"></script>
+<script>
+    var global = this;
+    $(function (){
+        // 单选或多选
+        var selector = {
+            'item':             '.woo img',
+            'wrapper':          '.woo',
+            'selected_class':   'item-selected',
+            'del_pop':          '#del-selected>a',
+            'badge_selected':   '#selected-badge',
+            'badge_total':      '#item-count-badge'
+        };
+        var selectItems = new SelectItems(selector, 'album');
+
+        var operationSelector = {
+            select_reverse: '#reverse-selected',
+            select_all: '#all-selected',
+            select_all_cancel: '#cancel-selected',
+            select_delete_modal: '#delete-modal',
+            select_delete: '#del-selected'
+        };
+        selectItems.bindOperation(operationSelector);
+        selectItems.bindHotKeys();
+        $(document).on('deleteSelectSuccess', function (e) {
+            $('#delete-modal').modal('hide');
+        }).on('deleteSelectFail', function (e) {
+                    $('#delete-modal').modal('hide');
+                });
+
+        // 启动/取消多选模式
+        var flag_ms = true;
+        $("#multi-select").click(function(e){
+            if (flag_ms) {
+                $(selector.item).click(function(e) {
+                    selectItems.selectOne(this, e.shiftKey);
+                    e.preventDefault();
+                });
+                $(this).text('Stop MultiSelect');
+                flag_ms = !flag_ms;
+            } else {
+                $(selector.item).unbind('click');
+                selectItems.cancelAllSelect();
+                $(this).text('Start MultiSelect');
+                flag_ms = !flag_ms;
+            }
+            e.preventDefault();
+        });
+
+        // 提示确认删除
+        $('#del-selected').click(function(e){
+            e.preventDefault();
+
+            var albums_path_html = '',
+                    folder_alert_html = '<span class="alert-danger" style="padding: 5px;margin-left: 20px;">Contains sub folders</span>';
+
+            selectItems.itemSelected.forEach(function(id) {
+                var href = $('#' + selectItems.id_prefix + id).closest('.cover').attr('href');
+                var pos = href.indexOf('/', 1);
+                albums_path_html += '<p><span class="delete-modal-warn">'
+                        + href.slice(pos + 1)
+                        + '</span>'
+                        + (href.slice(1, pos) == 'folder' ? folder_alert_html : '')
+                        + '</p>';
+            });
+            $('#delete-modal .modal-body').html(albums_path_html);
+            $('#delete-modal').modal();
+        });
+
+        // 改变相册根目录
+        $("#chg-album-root #chg").click(function(event) {
+            var root = $("#chg-album-root input").val();
+            $.get('/operationHandler', {album_base_dir: root, mode: 'set-path'}, function(data) {
+                if (data.status == 'OK') {
+                    location.reload();
+                } else {
+                    var pop = $('#chg-album-root input');
+                    pop.attr({'data-content': data.msg, 'data-placement': "bottom"});
+                    pop.popover('show');
+                    setTimeout(function(){pop.popover('destroy')}, 2500);
+                }
+            })
+            event.preventDefault();
+        })
+        // 添加相册根目录
+        $("#chg-album-root #add").click(function(event) {
+            var root = $("#chg-album-root input").val();
+            $.get('/operationHandler', {album_base_dir: root, mode: 'add-path'}, function(data) {
+                if (data.status == 'OK') {
+                    location.reload();
+                } else {
+                    var pop = $('#chg-album-root input');
+                    pop.attr({'data-content': data.msg, 'data-placement': "bottom"});
+                    pop.popover('show');
+                    setTimeout(function(){pop.popover('destroy')}, 2500);
+                }
+            })
+            event.preventDefault();
+        })
+
+        $('#chg-album-root input').keydown(function(event) {
+            if (event.keyCode == 13) {  // enter
+                $('#chg-album-root #chg').click();
+                event.preventDefault();
+            }
+        });
+
+        var hotKeys = [
+            'ctrl+shift+m'
+        ];
+        $(document).bind('keydown', hotKeys[0], function() {
+            $('#multi-select').click();
+        });
+
+        // Help Document
+        $('.help').click(function(e) {
+            e.preventDefault();
+            $(this).toggleClass('open');
+        });
+
+        var conf = {
+            "arrform" : ['collect'],
+            "arrsplit" : '',            // The extend width of each common column including margin between two cols.
+            "arrmasnw" : 275,           // col width including margin
+            "arrmargin" : 21,
+            "arrfmasnw" : 0,            // The gap between units in one column.
+            "arrgap" : 0,
+
+            "resize" : true,
+            "onScroll" : function (tp){
+            }
+        };
+        $.Woo(conf);
+
+        // transition when deleting items
+        $('.woo').css('transition', 'top .3s ease-in-out, left .3s ease-in-out');
+    });
+</script>
+</body>
+</html>

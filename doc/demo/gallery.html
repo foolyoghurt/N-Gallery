@@ -1,0 +1,542 @@
+
+<!DOCTYPE>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title>C</title>
+    <!--<link href="public/css/style.css" rel="stylesheet" type="text/css"/>-->
+    <link href="public/bs3/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
+    <link href="public/css/album.css" rel="stylesheet" type="text/css" />
+    <link href="public/images/favicon.png" rel="shortcut icon" type='image/vnd.microsoft.icon' />
+</head>
+<body>
+<div id="album-container">
+    <header id="header">
+        <nav class="navbar navbar-fixed-top navbar-inverse" role="navigation">
+    <!-- Brand and toggle get grouped for better mobile display -->
+    <div class="navbar-header">
+        <a class="navbar-brand" href="#">N-Gallery</a>
+    </div>
+
+    <!-- Collect the nav links, forms, and other content for toggling -->
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+        <ul class="nav navbar-nav">
+            <li class="active"><a href="/">Home</a></li>
+            <li id="del-selected"><a href="#" data-placement="bottom" data-content="Delete Success">Delete Selected
+                    <span id="selected-badge" class="badge" style="margin-left: 10px">0</span></a></li>
+            <li id="reverse-selected"><a href="#">Reverse</a></li>
+            <li id="all-selected"><a href="#">Select All
+                    <span id="item-count-badge" class="badge" style="margin-left: 10px">5</span></a></li>
+            <li id="cancel-selected"><a href="#">Cancel All</a></li>
+        </ul>
+        <ul class="nav navbar-nav navbar-right" style="padding-right: 10px">
+            <li class="help">
+                <a href="#"><i class="glyphicon glyphicon-question-sign"></i></a>
+                <div class="dropdown-menu">
+                    <h3>/album/</h3>
+
+<h4>快捷键</h4>
+
+<p><code>Up</code>/<code>Down</code> : 上一张/下一张<br/><code>Ctrl</code> + <code>Left/Right</code> : 上一页/下一页<br/><code>Ctrl</code> + <code>A</code> : 全选<br/><code>Ctrl</code> + <code>R</code> : 反选<br/><code>Esc</code> : 取消所选<br/><code>Ctrl</code>+ <code>Enter</code> : 选定当前屏幕所对应的图片<br/><code>Ctrl</code> + <code>Del</code> : 删除当前屏幕所对应的图片  </p>
+
+<h4>跳转框</h4>
+
+<p>跳转到第N页的M张图片，输入N:M  </p>
+
+<h3>/</h3>
+
+<h4>快捷键</h4>
+
+<p><code>Ctrl</code> + <code>A</code> : 全选<br/><code>Ctrl</code> + <code>R</code> : 反选<br/><code>Esc</code> : 取消所选
+<code>Ctrl</code> + <code>Del</code> : 删除当前屏幕所对应的图片<br/><code>Ctrl</code> + <code>Shift</code> + <code>M</code> : 启动/取消多选模式  </p>
+
+<h4>多选模式</h4>
+
+<p>点击<code>启动多选模式</code>后，才能对相册进行选中，删除等操作，否则点击相册默认为打开相册  </p>
+
+<h4>切换相册根目录</h4>
+
+<p>点击<strong>更改</strong>将以输入的目录为根目录浏览相册<br/>点击<strong>添加</strong>将以输入的目录加上原来的目录共同为根目录浏览相册  </p>
+                </div>
+            </li>
+            <li><a id='zoom-out' href="#"><span class="glyphicon glyphicon-zoom-out"></span></a></li>
+            <li><a id='zoom-in' href="#"><span class="glyphicon glyphicon-zoom-in"></span></a></li>
+
+            <form  id="jump-to-item" class="navbar-form navbar-left" role="search">
+                <div class="form-group">
+                    <input type="text" class="form-control" placeholder="(N:M)Jump to Nth page Mth pic">
+                </div>
+                <button type="submit" class="btn btn-default">Jump To</button>
+            </form>
+        </ul>
+    </div><!-- /.navbar-collapse -->
+</nav>
+    </header>
+    <!-- header end -->
+    <div id="img-nav">
+        <div id="img-nav-pn"></div>
+        <div id="img-nav-pre" class="nav" style="display: none;"></div>
+        <div id="img-nav-board">1</div>
+        <div id="img-nav-next" class="nav" style="display: none;"></div>
+    </div>
+    <h1>C</h1>
+
+
+<div class="img-item">
+    <div class="img-meta">
+        <a href="#" class="img-metabg-sign"><span class="glyphicon glyphicon-info-sign"></span></a>
+
+        <div class="img-metabg">
+            <table>
+                <tbody>
+                <tr>
+                    <th>路径</th>
+                    <td>local/E:/tmp/pic/C/demo.jpg</td>
+                </tr>
+                <tr>
+                    <th>尺寸</th>
+                    <td>1280 x 853</td>
+                </tr>
+                <tr>
+                    <th>大小</th>
+                    <td>792 KB</td>
+                </tr>
+                <tr>
+                    <th>创建时间</th>
+                    <td>Mon Mar 10 2014 16:58:29 GMT+0800 (中国标准时间)</td>
+                </tr>
+                <tr>
+                    <th>修改时间</th>
+                    <td>Thu Mar 06 2014 23:47:58 GMT+0800 (中国标准时间)</td>
+                </tr>
+                <tr>
+                    <th>访问时间</th>
+                    <td>Mon Mar 10 2014 16:58:29 GMT+0800 (中国标准时间)</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <a href="#" class="img">
+        <div class="img-wrapper">
+            <img src="gallery/demo.jpg" id="pic0"
+                 data-width="1280" data-height="853"
+                 data-original-title="操作"/>
+        </div>
+    </a>
+    <button type="button" class="img-opr btn btn-danger btn-lg"><span class="glyphicon glyphicon-trash"></span>
+    </button>
+</div>
+
+
+<div class="img-item">
+    <div class="img-meta">
+        <a href="#" class="img-metabg-sign"><span class="glyphicon glyphicon-info-sign"></span></a>
+
+        <div class="img-metabg">
+            <table>
+                <tbody>
+                <tr>
+                    <th>路径</th>
+                    <td>local/E:/tmp/pic/C/demo.jpg</td>
+                </tr>
+                <tr>
+                    <th>尺寸</th>
+                    <td>1280 x 616</td>
+                </tr>
+                <tr>
+                    <th>大小</th>
+                    <td>709 KB</td>
+                </tr>
+                <tr>
+                    <th>创建时间</th>
+                    <td>Mon Mar 10 2014 16:58:29 GMT+0800 (中国标准时间)</td>
+                </tr>
+                <tr>
+                    <th>修改时间</th>
+                    <td>Thu Mar 06 2014 23:48:10 GMT+0800 (中国标准时间)</td>
+                </tr>
+                <tr>
+                    <th>访问时间</th>
+                    <td>Mon Mar 10 2014 16:58:29 GMT+0800 (中国标准时间)</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <a href="#" class="img">
+        <div class="img-wrapper">
+            <img src="gallery/demo.jpg" id="pic1"
+                 data-width="1280" data-height="616"
+                 data-original-title="操作"/>
+        </div>
+    </a>
+    <button type="button" class="img-opr btn btn-danger btn-lg"><span class="glyphicon glyphicon-trash"></span>
+    </button>
+</div>
+
+
+<div class="img-item">
+    <div class="img-meta">
+        <a href="#" class="img-metabg-sign"><span class="glyphicon glyphicon-info-sign"></span></a>
+
+        <div class="img-metabg">
+            <table>
+                <tbody>
+                <tr>
+                    <th>路径</th>
+                    <td>local/E:/tmp/pic/C/demo.jpg</td>
+                </tr>
+                <tr>
+                    <th>尺寸</th>
+                    <td>1280 x 818</td>
+                </tr>
+                <tr>
+                    <th>大小</th>
+                    <td>651 KB</td>
+                </tr>
+                <tr>
+                    <th>创建时间</th>
+                    <td>Mon Mar 10 2014 16:58:29 GMT+0800 (中国标准时间)</td>
+                </tr>
+                <tr>
+                    <th>修改时间</th>
+                    <td>Thu Mar 06 2014 23:47:55 GMT+0800 (中国标准时间)</td>
+                </tr>
+                <tr>
+                    <th>访问时间</th>
+                    <td>Mon Mar 10 2014 16:58:29 GMT+0800 (中国标准时间)</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <a href="#" class="img">
+        <div class="img-wrapper">
+            <img src="gallery/demo.jpg" id="pic2"
+                 data-width="1280" data-height="818"
+                 data-original-title="操作"/>
+        </div>
+    </a>
+    <button type="button" class="img-opr btn btn-danger btn-lg"><span class="glyphicon glyphicon-trash"></span>
+    </button>
+</div>
+
+
+<div class="img-item">
+    <div class="img-meta">
+        <a href="#" class="img-metabg-sign"><span class="glyphicon glyphicon-info-sign"></span></a>
+
+        <div class="img-metabg">
+            <table>
+                <tbody>
+                <tr>
+                    <th>路径</th>
+                    <td>local/E:/tmp/pic/C/demo.jpg</td>
+                </tr>
+                <tr>
+                    <th>尺寸</th>
+                    <td>1280 x 853</td>
+                </tr>
+                <tr>
+                    <th>大小</th>
+                    <td>251 KB</td>
+                </tr>
+                <tr>
+                    <th>创建时间</th>
+                    <td>Mon Mar 10 2014 16:58:29 GMT+0800 (中国标准时间)</td>
+                </tr>
+                <tr>
+                    <th>修改时间</th>
+                    <td>Thu Mar 06 2014 23:47:51 GMT+0800 (中国标准时间)</td>
+                </tr>
+                <tr>
+                    <th>访问时间</th>
+                    <td>Mon Mar 10 2014 16:58:29 GMT+0800 (中国标准时间)</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <a href="#" class="img">
+        <div class="img-wrapper">
+            <img src="gallery/demo.jpg" id="pic3"
+                 data-width="1280" data-height="853"
+                 data-original-title="操作"/>
+        </div>
+    </a>
+    <button type="button" class="img-opr btn btn-danger btn-lg"><span class="glyphicon glyphicon-trash"></span>
+    </button>
+</div>
+
+
+<div class="img-item">
+    <div class="img-meta">
+        <a href="#" class="img-metabg-sign"><span class="glyphicon glyphicon-info-sign"></span></a>
+
+        <div class="img-metabg">
+            <table>
+                <tbody>
+                <tr>
+                    <th>路径</th>
+                    <td>local/E:/tmp/pic/C/demo.jpg</td>
+                </tr>
+                <tr>
+                    <th>尺寸</th>
+                    <td>1280 x 853</td>
+                </tr>
+                <tr>
+                    <th>大小</th>
+                    <td>1047 KB</td>
+                </tr>
+                <tr>
+                    <th>创建时间</th>
+                    <td>Mon Mar 10 2014 16:58:29 GMT+0800 (中国标准时间)</td>
+                </tr>
+                <tr>
+                    <th>修改时间</th>
+                    <td>Thu Mar 06 2014 23:47:15 GMT+0800 (中国标准时间)</td>
+                </tr>
+                <tr>
+                    <th>访问时间</th>
+                    <td>Mon Mar 10 2014 16:58:29 GMT+0800 (中国标准时间)</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <a href="#" class="img">
+        <div class="img-wrapper">
+            <img src="gallery/demo.jpg" id="pic4"
+                 data-width="1280" data-height="853"
+                 data-original-title="操作"/>
+        </div>
+    </a>
+    <button type="button" class="img-opr btn btn-danger btn-lg"><span class="glyphicon glyphicon-trash"></span>
+    </button>
+</div>
+
+</div>
+<!-- end of #album-container -->
+
+<!-- pagination -->
+<div class="container">
+    <ul class="pagination">
+        <li><a href="gallery.html" class="first">&laquo;</a></li>
+        
+        <li class=active><a href="gallery.html?pn=1">1</a></li>
+        
+        <li><a href="gallery.html?pn=1" class="last">&raquo;</a></li>
+    </ul>
+</div>
+<div class="get-top">
+    <a href="#" class="up"><span class="glyphicon glyphicon-chevron-up"></span></a>
+    <a href="#" class="down"><span class="glyphicon glyphicon-chevron-down"></span></a>
+</div>
+<!-- Modal -->
+<div class="modal fade" id="delete-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title" id="myModalLabel">Delete Confirmation</h4>
+            </div>
+            <div class="modal-body">
+                Delete Confirmation？
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                <button id="delete-OK" type="button" class="btn btn-primary">OK</button>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+</body>
+<script src="public/javascripts/jquery-1.10.2.min.js"></script>
+<script src="public/javascripts/jquery.hotkeys.js"></script>
+<script src="public/bs3/js/bootstrap.min.js"></script>
+<script src="public/javascripts/song-demo.js"></script>
+<script>
+$(function () {
+
+    // 显示图片属性信息
+    $('.img-meta a').click(function(e) {
+        $(this).next('.img-metabg').toggleClass('img-metabg-open');
+        e.preventDefault();
+        e.stopPropagation();
+    });
+
+    var selector = {
+        'item': '.img-item img',
+        'wrapper': '.img-item',
+        'selected_class': 'item-selected',
+        'del_pop': '#del-selected>a',
+        'badge_selected': '#selected-badge',
+        'badge_total': '#item-count-badge'
+    };
+    var selectItems = new SelectItems(selector, 'pic');
+
+    var operationSelector = {
+        select_one: '.img-item',
+        select_reverse: '#reverse-selected',
+        select_all: '#all-selected',
+        select_all_cancel: '#cancel-selected',
+        select_delete: '#del-selected',
+        select_delete_modal: '#delete-modal',
+        select_delete_one: '.img-opr'
+    };
+    selectItems.bindOperation(operationSelector);
+    selectItems.bindHotKeys();
+    $(document).on('deleteSelectSuccess',function (e) {
+        itemScroll.refresh();
+        $('#delete-modal').modal('hide');
+        
+    }).on('deleteSelectFail', function (e) {
+        $('#delete-modal').modal('hide');
+    }).on('deleteOneSuccess', function () {
+        // 由于删除特效hide有延时
+        setTimeout(function() { itemScroll.refresh(); }, 550);
+    });
+
+    // 显示图片操作按钮
+    $('.img-item').hover(function () {
+        var $this = $(this);
+        $this.find('.img-opr').show();
+        $this.find('.img-metabg-sign').show();
+    }, function () {
+        var $this = $(this);
+        $this.find('.img-opr').hide();
+        $this.find('.img-metabg-sign').hide();
+    });
+
+    // zoom in/out
+    $('#zoom-in').click(function (e) {
+        var width = parseInt($('.img-item').css('width')) * 1.1 + 'px';
+        $('.img-item').css({width: width});
+        $('.img-item img').css({width: width});
+        e.preventDefault();
+    });
+    $('#zoom-out').click(function (e) {
+        var width = parseInt($('.img-item').css('width')) / 1.1 + 'px';
+        $('.img-item').css({width: width});
+        $('.img-item img').css({width: width});
+        e.preventDefault();
+    });
+
+
+    // 计数牌，显示当前屏幕所对应的图片时第几张
+    var itemScroll = new ItemScroll({
+        selector: selector.item,
+        badge_sel: '#img-nav-board',
+        margin: 30
+    });
+
+    // 必须等图片加载完毕后才能执行refresh，否则offset属性不可获取
+    $(window).load(function () {
+        itemScroll.refresh();
+    });
+    $(document).scroll(function () {
+        itemScroll.process();
+    });
+
+    $('#img-nav').hover(function () {
+        $(this).children('.nav').show();
+    },
+    function () {
+        $(this).children('.nav').hide();
+    });
+    // 初始化页号
+    var pn = location.search.match(/pn=(\d+)/);
+    pn = pn ? pn[1] : 1;
+    $('#img-nav-pn').text(pn);
+    // 跳转到上一张图片
+    $('#img-nav-pre').click(function (e) {
+        itemScroll.scrollN(-1);
+        e.preventDefault();
+    });
+    // 下一张
+    $('#img-nav-next').click(function (e) {
+        itemScroll.scrollN(1);
+        e.preventDefault();
+    });
+
+    var hotKeys = [
+        'up',
+        'down',
+        'ctrl+left',
+        'ctrl+right'
+    ];
+    $(document).bind('keydown', hotKeys[0], function() {
+        $('#img-nav-pre').click();
+    }).bind('keydown', hotKeys[1], function() {
+        $('#img-nav-next').click();
+    }).bind('keydown', hotKeys[2], function() {
+        var curPageNum = +$('.pagination > .active > a').text();
+        if (curPageNum <= 1) { return; }
+        var redirectUrl = location.origin + location.pathname + '?pn=' + (curPageNum - 1);
+        location.assign(redirectUrl);
+    }).bind('keydown', hotKeys[3], function() {
+        var curPageNum = +$('.pagination > .active > a').text();
+        var maxPageNum = +$('.pagination li:last a').attr('href').split('pn=')[1];
+        if (maxPageNum <= curPageNum) { return; }
+        var redirectUrl = location.origin + location.pathname + '?pn=' + (curPageNum + 1);
+        location.assign(redirectUrl);
+    });
+
+    // 跳转到第N张图片
+    $("#jump-to-item button").click(function (e) {
+        e.preventDefault();
+
+        var popEle = "#jump-to-item input",
+                vals = $(popEle).val().split(':'),
+                hasError = false,
+                pnMax = +$('.pagination li:last a').attr('href').split('pn=')[1];
+
+
+        if (vals.length == 2) {
+            var pn = parseInt(vals[0]),
+                    num = +vals[1];
+
+            if (!isNaN(pn) && pn <= pnMax && pn >= 1) {
+                var redirectUrl = location.origin + location.pathname + '?pn=' + pn + '#pic' + (num - 1);
+                location.assign(redirectUrl);
+                return;
+            } else {
+                hasError = true;
+            }
+
+        } else {
+            var num = +vals[0];
+        }
+        if (hasError || itemScroll.scrollToN(num) === false) {
+            var $pop = $(popEle);
+            $pop.attr({
+                'data-content': '页数范围: ' + '1-' + pnMax + '  图片数范围: ' + '1-' + selectItems.itemTotal,
+                'data-placement': "bottom"
+            }).popover('show');
+
+            setTimeout(function () {
+                $pop.popover('destroy')
+            }, 2500);
+        }
+    });
+
+    // get top
+    $('.get-top .up').click(function() {
+        e.preventDefault();
+        $(document).scrollTop(0);
+    });
+    $('.get-top .down').click(function(e) {
+        e.preventDefault();
+        $(document).scrollTop($(document).height());
+    });
+
+    // Help Document
+    $('.help').click(function(e) {
+        e.preventDefault();
+        $(this).toggleClass('open');
+    });
+
+});
+</script>
+</html>

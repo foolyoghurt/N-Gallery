@@ -3,6 +3,7 @@
  */
 
 var fs = require('fs');
+var fsPlus = require('../lib/fs-plus');
 var path = require('path');
 var imgSize = require('image-size');
 var conf = require('../lib/config');
@@ -41,7 +42,7 @@ exports.index = function index(req, res) {
 
 exports.folder = function (req, res) {
 
-  var folder  = toLinuxPath(req.params[0]);
+  var folder  = fsPlus.toLinuxPath(req.params[0]);
   var items = folderHandler(folder);
   var title = path.basename(folder);
 
@@ -51,7 +52,7 @@ exports.folder = function (req, res) {
   var dirs = conf.album_base_dirs;
   var breadcrumb = undefined;
   for (var i = 0; i < dirs.length; i++) {
-    var basePath = toLinuxPath(dirs[i]);
+    var basePath = fsPlus.toLinuxPath(dirs[i]);
     if (absPath.indexOf(basePath) === 0) {
       break;
     }
@@ -59,7 +60,7 @@ exports.folder = function (req, res) {
   if (i != dirs.length) {
     var baseUrl = '/folder/';
     var nodePath = basePath.replace(/\/$/, '');
-    var relPath = toLinuxPath(path.relative(nodePath, absPath));
+    var relPath = fsPlus.toLinuxPath(path.relative(nodePath, absPath));
     var pathNodes = [];
     relPath.split('/').forEach(function(node) {
       nodePath += '/' + node;
@@ -108,11 +109,13 @@ exports.album = function (req, res) {
   res.render('album', {
     title: title,
     items: result[0],
+    
+    is_writable: fsPlus.isWritableSync(album),
 
-    // 不含query string的url
+    // url exclude query string
     url: baseUrl,
 
-    // 总共页数，当前页数
+    // total page number, current page number
     page: {total: Math.ceil(result[1] / countPerPage), number: pn}, 
     config: conf
   });
@@ -145,24 +148,29 @@ function folderHandler(baseDir) {
 
     // => /a
     for (var i = 0; i < files.length; i++) {
-      var curDir = files[i],
-        title = curDir ? curDir : path.basename(baseDir),
-        cover = null,
-        imgCount = 0,
-        dirCount = 0;
+      var curDir = files[i];
+      var title = curDir ? curDir : path.basename(baseDir);
+      var cover = null;
+      var imgCount = 0;
+      var dirCount = 0;
+      var absCurDir = path.join(baseDir, curDir);
 
-      if (curDir[0] == '.' || curDir == 'logs') {
+      if (curDir[0] == '.') {
         continue;
       }
-      if (fs.lstatSync(path.join(baseDir, curDir)).isDirectory()) {
-        var subFiles = fs.readdirSync(path.join(baseDir, curDir));
+      
+      
+      if (fs.statSync(absCurDir).isDirectory()) {
+        var subFiles = fs.readdirSync(absCurDir);
         if (!subFiles.length) {
           continue;
         }
+        
+        var isWritable = fsPlus.isWritableSync(absCurDir);
 
         // => /a/b
         for (var j = 0; j < subFiles.length; j++) {
-          var file = path.join(baseDir, curDir, subFiles[j]);
+          var file = path.join(absCurDir, subFiles[j]);
           if (reImgType.test(subFiles[j])) {
             if (!cover) {
               cover = file;
@@ -184,8 +192,9 @@ function folderHandler(baseDir) {
             cover: 'images/folder.jpg',
             count: dirCount,
             size: {width: baseSize, height: baseSize - 30},
-            href: '/' + defaultType + '/' + path.join(baseDir, curDir),
-            type: defaultType
+            href: '/' + defaultType + '/' + absCurDir,
+            type: defaultType,
+            is_writable: isWritable
           });
           continue;
         }
@@ -206,8 +215,9 @@ function folderHandler(baseDir) {
           cover: 'local/' + cover,
           count: (type == 'album' || type == 'root') ? imgCount : dirCount,
           size: coverSize,
-          href: '/' + type + '/' + path.join(baseDir, curDir),
-          type: type
+          href: '/' + type + '/' + absCurDir,
+          type: type,
+          is_writable: isWritable
         });
       }
     }
@@ -237,7 +247,7 @@ function albumHandler(album, pn, countPerPage) {
     if (reImgType.test(files[i])) {
       var item = {};
       var src = path.join(album, files[i]);
-      item['src'] = toLinuxPath('local/' + src);
+      item['src'] = fsPlus.toLinuxPath('local/' + src);
       var stat = fs.statSync(src);
       try {
         var size = imgSize(src);
@@ -258,10 +268,4 @@ function albumHandler(album, pn, countPerPage) {
 
   return [items, files.length];
 
-}
-
-
-// For Windows path
-function toLinuxPath(p) {
-  return p.replace(/\\/g, '/').replace(/\/$/, '');
 }

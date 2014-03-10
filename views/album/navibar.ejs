@@ -8,7 +8,7 @@
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
         <ul class="nav navbar-nav">
             <li class="active"><a href="/"><%= __('首页') %></a></li>
-            <li id="del-selected"><a href="#" data-placement="bottom" data-content="Delete Success"><%= __('删除选中项') %>
+            <li id="del-selected" <%- is_writable ? '' : 'class="disabled"' %>><a href="#" data-placement="bottom" data-content="Delete Success"><%= __('删除选中项') %>
                     <span id="selected-badge" class="badge" style="margin-left: 10px">0</span></a></li>
             <li id="reverse-selected"><a href="#"><%= __('反选') %></a></li>
             <li id="all-selected"><a href="#"><%= __('全选') %>

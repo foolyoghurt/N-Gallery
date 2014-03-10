@@ -1,4 +1,4 @@
-<div class="woo">
+<div class="woo<%= item.is_writable ? '' : ' not-writable' %>">
     <a <%= _blank ? 'target="_blank"' : '' %> class="cover" href="<%= item.href %>">
     <div class="j">
         <div class="img-wrapper">
@@ -8,6 +8,9 @@
             <div class="cell-title">
                 <% if (item.type == 'root') { %>
                 <span class="glyphicon glyphicon-home"></span>
+                <% } %>
+                <% if (!item.is_writable) { %>
+                <span class="glyphicon glyphicon-warning-sign"></span>   
                 <% } %>
                 <span><%= item.title %></span>
             </div>

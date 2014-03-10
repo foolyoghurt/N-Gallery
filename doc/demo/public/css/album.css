@@ -39,20 +39,6 @@ span.delete-modal-warn {
   dispaly: inline-block;
   font-size: 1.5em;
 }
-.not-writable .row {
-  background: #fcf9e8;
-}
-.not-writable .glyphicon-warning-sign {
-  color: #a94442 !important;
-}
-.not-writable h1 {
-  color: #a94442;
-  background-color: #f2dede !important;
-  border-color: #ebccd1;
-}
-.not-writable h1 span {
-  font-size: 0.3em;
-}
 #album-container {
   width: 950px;
   margin: 0 auto;
@@ -67,7 +53,7 @@ span.delete-modal-warn {
   text-shadow: 2px 2px 3px #888;
 }
 .img-wrapper-selected {
-  background: url("/images/ok.png") center no-repeat;
+  background: url("../images/ok.png") center no-repeat;
   background-size: 256px;
 }
 .img-item {
@@ -226,4 +212,18 @@ span.delete-modal-warn {
 #jump-to-item input {
   width: 180px;
   font-size: 0.8em;
+}
+.not-writable .row {
+    background: #fcf9e8;
+}
+.not-writable .glyphicon-warning-sign {
+    color: #a94442;
+}
+.not-writable h1 {
+    color: #a94442;
+    background-color: #f2dede !important;
+    border-color: #ebccd1;
+}
+.not-writable h1 span {
+    font-size: 0.3em;
 }

@@ -8,7 +8,7 @@
     <link href="/css/album.css" rel="stylesheet" type="text/css" />
 </head>
 <body>
-<div id="album-container">
+<div id="album-container" <%- is_writable ? '' : ' class="not-writable"' %>>
     <header id="header">
         <% include ../album/navibar.ejs %>
     </header>
@@ -19,4 +19,9 @@
         <div id="img-nav-board">1</div>
         <div id="img-nav-next" class="nav" style="display: none;"></div>
     </div>
-    <h1><%= title %></h1>
+    <h1>
+        <%= title %>
+        <% if (!is_writable) { %>
+        <span>No Permission to Delete</span>
+        <% } %>
+    </h1>
