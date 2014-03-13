@@ -322,31 +322,31 @@ var SelectItems = (function(global) {
 
     this.oprationSelector = selectors;
 
-    // 单选
+    // click to select one
     selectors.select_one && $(selectors.select_one).click(function(e) {
       _this.selectOne($(this).find('img'), e.shiftKey);
       e.preventDefault();
     });
 
-    // 全选
+    // select all
     selectors.select_all && $(selectors.select_all).click(function(e) {
       _this.allSelect();
       e.preventDefault();
     });
 
-    // 全部取消
+    // cancel all selected
     selectors.select_all_cancel && $(selectors.select_all_cancel).click(function(e) {
       _this.cancelAllSelect();
       e.preventDefault();
     });
 
-    // 反选
+    // reverse selected
     selectors.select_reverse && $(selectors.select_reverse).click(function(e) {
       _this.reverseSelect();
       e.preventDefault();
     });
 
-    // 删除选中项
+    // delete selected images
     $('#delete-OK').click(function(e) {
       e.preventDefault();
 
@@ -366,12 +366,6 @@ var SelectItems = (function(global) {
           var href = $('#' + _this.id_prefix + id).closest('.cover').attr('href');
           return {type: href.slice(1, href.indexOf('/', 1)), path: href.slice(href.indexOf('/', 1) + 1)};
         }, 'albums', _this.type);
-
-        /*if (success2) {
-          $(document).trigger('deleteSelectSuccess');
-        } else {
-          $(document).trigger('deleteSelectFail');
-        }*/
       }
 
       if (success) {
@@ -379,19 +373,21 @@ var SelectItems = (function(global) {
       } else {
         $(document).trigger('deleteSelectFail');
       }
+      
     });
     
-    // shortcut key
+    // shortcut key enter to confirm delete operation
     var $modal = $(selectors.select_delete_modal);
     $modal.bind('keydown', 'return', function() {
       $('#delete-OK').click();
     });
     
+    // delete button, show delete modal first. Images will be deleted after user comfirmation
     selectors.select_delete && $(selectors.select_delete).click(function(e) {
+      e.preventDefault();
 
       var success;
       
-      // delete operation
       if (_this.type == 'pic') {
 
         // delete confirmation warn  
@@ -447,10 +443,9 @@ var SelectItems = (function(global) {
         $(document).trigger('deleteSelectFail');
       }
 
-      e.preventDefault();
     });
 
-    // 删除单张图片
+    // delete one image
     selectors.select_delete_one && $(selectors.select_delete_one).click(function (e) {
       e.preventDefault();
       e.stopPropagation();
@@ -473,8 +468,9 @@ var SelectItems = (function(global) {
 
   SelectItems.prototype.bindHotKeys = function() {
 
-    // 可选，绑定键盘快捷键操作(必须先bindOperation）
-    // ========================================
+    // Optional，bind the shortcut keys 
+    // must be done after bindOperation function
+    // =========================================
 
     var selectors = this.oprationSelector,
 
@@ -506,7 +502,6 @@ var SelectItems = (function(global) {
 
   };
 
-  // 不用new调用构造函数，调用时注意此函数存在于全局变量环境里
   global.selectItems = function selectItems(selector, id_prefix) {
     return new SelectItems(selector, id_prefix);
   };

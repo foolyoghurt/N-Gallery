@@ -1,6 +1,6 @@
 # N-Gallery
 
-A web photo gallery and picture viewer/browser using local image directory, powered by Node.js ([Demo Website](http://foolyoghurt.github.io/projects/n-gallery/demo/) 
+A web photo gallery and picture viewer/browser using local image directory, powered by Node.js ([Demo Website](http://foolyoghurt.github.io/projects/n-gallery/demo/) )   
 （中文文档见下文）
 
 ## Features
@@ -60,9 +60,9 @@ n-gallery_home_path$ supervisor index.js
 ```
 
 ### Configuration
-In the `lib/config.js` file, you can specify the server port number, image directory and so on. `album_base_dirs` must be specified for image directories unless you specify it from terminal command everry time
+In the `lib/config/config.js` file, you can specify the server port number, image directory and so on. `album_base_dirs` must be specified for image directories unless you specify it from terminal command everry time
 ```
-// lib/config.js
+// lib/config/config.js
 ...
 album_base_dirs: ["/tmp/gallery1, /tmp/gallery2"],
 // If not set, will guess by the "Accept-Language" header field by default
@@ -100,7 +100,7 @@ If specified directory **doesn't have subfolders**, so a gallery is displayed di
 
 # N-Gallery
 
-一个基于Node.js的网页图片浏览器，利用本地图片文件夹生成网页 ([示例网站](http://foolyoghurt.github.io/projects/n-gallery/demo/) 
+一个基于Node.js的网页图片浏览器，利用本地图片文件夹生成网页 ([示例网站](http://foolyoghurt.github.io/projects/n-gallery/demo/))   
 
 ## 特性
 1. List pictures of a gallery fast and with beautiful web page
@@ -158,9 +158,9 @@ n-gallery_home_path$ supervisor index.js
 ```
 
 ### 配置
-在`lib/config.js`文件里，可以设置端口号、图片目录等。其中`album_base_dirs`必须设置，除非每次在终端运行命令的时候用参数指定
+在`lib/config/config.js`文件里，可以设置端口号、图片目录等。其中`album_base_dirs`必须设置，除非每次在终端运行命令的时候用参数指定
 ```
-// lib/config.js
+// lib/config/config.js
 ...
 album_base_dirs: ["/tmp/gallery1, /tmp/gallery2"],
 // 如果不设置，默认根据HTTP header中的『accept-language』来判断所使用的语言（只支持中文和英文 => zh, en）

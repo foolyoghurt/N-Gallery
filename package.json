@@ -1,6 +1,6 @@
 {
   "name": "n-gallery",
-  "version": "0.4.1",
+  "version": "0.4.2",
   "description": "A nodejs web image viewer/gallery using local image directory",
   "bin": {
     "n-gallery": "./bin/n-gallery"

@@ -34,7 +34,7 @@
 <script>
     var global = this;
     $(function (){
-        // 单选或多选
+
         var selector = {
             'item':             '.woo img',
             'wrapper':          '.woo',
@@ -60,7 +60,7 @@
             $('#delete-modal').modal('hide');
         });
 
-        // 启动/取消多选模式
+        // On/Off multi select
         var flag_ms = true;
         $("#multi-select").click(function(e){
             if (flag_ms) {
@@ -68,18 +68,18 @@
                     selectItems.selectOne(this, e.shiftKey);
                     e.preventDefault();
                 });
-                $(this).text('<%= __('取消多选模式') %>');
+                $(this).text('<%= __('Off MultiSelect') %>');
                 flag_ms = !flag_ms;
             } else {
                 $(selector.item).unbind('click');
                 selectItems.cancelAllSelect();
-                $(this).text('<%= __('启动多选模式') %>');
+                $(this).text('<%= __('On MultiSelect') %>');
                 flag_ms = !flag_ms;
             }
             e.preventDefault();
         });
 
-        // 提示确认删除
+        // Delete confirmation
         $('#del-selected').click(function(e){
             e.preventDefault();
 
@@ -99,7 +99,7 @@
             $('#delete-modal').modal();
         });
 
-        // 改变相册根目录
+        // change gallery base dir
         $("#chg-album-root #chg").click(function(event) {
             var root = $("#chg-album-root input").val();
             $.get('/operationHandler', {album_base_dir: root, mode: 'set-path'}, function(data) {
@@ -114,7 +114,7 @@
             })
             event.preventDefault();
         })
-        // 添加相册根目录
+        // add gallery base dir 
         $("#chg-album-root #add").click(function(event) {
             var root = $("#chg-album-root input").val();
             $.get('/operationHandler', {album_base_dir: root, mode: 'add-path'}, function(data) {

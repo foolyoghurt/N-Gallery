@@ -23,10 +23,64 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
+      <file leaf-file-name="index.js" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/routes/index.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="70" column="23" selection-start="2151" selection-end="2151" vertical-scroll-proportion="0.0" vertical-offset="958" max-vertical-offset="7766">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="en.json" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/doc/locales/en.json">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="23" column="14" selection-start="725" selection-end="735" vertical-scroll-proportion="-16.32258" vertical-offset="0" max-vertical-offset="682">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="item.ejs" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/views/album/item.ejs">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="37" column="14" selection-start="1264" selection-end="1264" vertical-scroll-proportion="0.0" vertical-offset="254" max-vertical-offset="1100">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="footer.ejs" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/views/index/footer.ejs">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="116" column="32" selection-start="4637" selection-end="4637" vertical-scroll-proportion="-82.32258" vertical-offset="0" max-vertical-offset="3894">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="config.js" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/lib/config/config.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="19" column="12" selection-start="555" selection-end="555" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="660">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
       <file leaf-file-name="package.json" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/package.json">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="2" column="19" selection-start="44" selection-end="44" vertical-scroll-proportion="0.05398773" vertical-offset="0" max-vertical-offset="1232">
+            <state line="2" column="18" selection-start="43" selection-end="43" vertical-scroll-proportion="0.05398773" vertical-offset="0" max-vertical-offset="1232">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="zh.json" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/doc/locales/zh.json">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="24" column="24" selection-start="560" selection-end="606" vertical-scroll-proportion="-17.032259" vertical-offset="0" max-vertical-offset="682">
               <folding />
             </state>
           </provider>
@@ -42,21 +96,21 @@
   <component name="IdeDocumentHistory">
     <option name="changedFiles">
       <list>
-        <option value="$PROJECT_DIR$/app.js" />
-        <option value="$PROJECT_DIR$/lib/fs-plus.js" />
-        <option value="$PROJECT_DIR$/views/index/item.ejs" />
-        <option value="$PROJECT_DIR$/routes/index.js" />
-        <option value="$PROJECT_DIR$/views/album/header.ejs" />
-        <option value="$PROJECT_DIR$/doc/demo/public/css/style.css" />
-        <option value="$PROJECT_DIR$/doc/demo/public/css/album.css" />
-        <option value="$PROJECT_DIR$/doc/demo/index.html" />
-        <option value="$PROJECT_DIR$/doc/demo/public/css/index.css" />
-        <option value="$PROJECT_DIR$/views/css/style.styl" />
-        <option value="$PROJECT_DIR$/doc/demo/gallery-not-writable.html" />
-        <option value="$PROJECT_DIR$/views/album/navibar.ejs" />
-        <option value="$PROJECT_DIR$/views/album/footer.ejs" />
+        <option value="$PROJECT_DIR$/node_modules/i18n/i18n.js" />
+        <option value="$PROJECT_DIR$/doc/help/makeHelpDoc.js" />
         <option value="$PROJECT_DIR$/lib/config.js" />
-        <option value="$PROJECT_DIR$/README.md" />
+        <option value="$PROJECT_DIR$/lib/config/index.js" />
+        <option value="$PROJECT_DIR$/doc/help/help-zh.md" />
+        <option value="$PROJECT_DIR$/doc/help/help-en.md" />
+        <option value="$PROJECT_DIR$/routes/index.js" />
+        <option value="$PROJECT_DIR$/views/album/navibar.ejs" />
+        <option value="$PROJECT_DIR$/views/index/navibar.ejs" />
+        <option value="$PROJECT_DIR$/views/album/item.ejs" />
+        <option value="$PROJECT_DIR$/doc/locales/zh.json" />
+        <option value="$PROJECT_DIR$/doc/locales/en.json" />
+        <option value="$PROJECT_DIR$/views/album/footer.ejs" />
+        <option value="$PROJECT_DIR$/views/index/footer.ejs" />
+        <option value="$PROJECT_DIR$/lib/config/config.js" />
         <option value="$PROJECT_DIR$/package.json" />
       </list>
     </option>
@@ -145,6 +199,7 @@
       <sortByType />
     </navigator>
     <panes>
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -191,6 +246,24 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
+              <option name="myItemId" value="index" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="app" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="n-gallery-dev" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="views" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
               <option name="myItemId" value="album" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
@@ -205,25 +278,7 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="public" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="app" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="n-gallery-dev" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="public" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="css" />
+              <option name="myItemId" value="routes" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -241,51 +296,112 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="app" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="n-gallery-dev" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="lib" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="config" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="app" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="n-gallery-dev" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="doc" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="locales" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="app" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="n-gallery-dev" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="doc" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="help" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="app" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="n-gallery-dev" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="doc" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
         </subPane>
       </pane>
-      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
     <property name="options.splitter.main.proportions" value="0.3" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="recentsLimit" value="5" />
     <property name="options.lastSelected" value="editing.templates" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="recentsLimit" value="5" />
     <property name="restartRequiresConfirmation" value="true" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="FullScreen" value="false" />
     <property name="DefaultHtmlFileTemplate" value="Html5" />
-    <property name="options.searchVisible" value="true" />
     <property name="options.splitter.details.proportions" value="0.14885955" />
+    <property name="options.searchVisible" value="true" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\song\AppData\Roaming\npm\node_modules\n-gallery-dev\doc\help" />
+      <recent name="C:\Users\song\AppData\Roaming\npm\node_modules\n-gallery-dev\doc" />
       <recent name="C:\Users\song\AppData\Roaming\npm\node_modules\n-gallery-dev\doc\demo" />
       <recent name="C:\Users\song\AppData\Roaming\npm\node_modules\node-album\doc" />
       <recent name="C:\Users\song\AppData\Roaming\npm\node_modules\node-album\public\javascripts" />
-      <recent name="C:\Users\song\AppData\Roaming\npm\node_modules\node-album\views\layout" />
-      <recent name="C:\Users\song\AppData\Roaming\npm\node_modules\node-album\public\stylesheets" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\song\AppData\Roaming\npm\node_modules\n-gallery-dev\doc\help" />
+      <recent name="C:\Users\song\AppData\Roaming\npm\node_modules\n-gallery-dev\doc" />
       <recent name="C:\Users\song\AppData\Roaming\npm\node_modules\node-album\lib\cache" />
       <recent name="C:\Users\song\AppData\Roaming\npm\node_modules\node-album\public\javascripts\lib" />
       <recent name="C:\Users\song\AppData\Roaming\npm\node_modules\node-album\views\layout" />
-      <recent name="C:\Users\song\WebstormProjects\app\views\index" />
-      <recent name="C:\Users\song\WebstormProjects\app\views\album" />
     </key>
   </component>
-  <component name="RunManager" selected="Node.js.index.js">
+  <component name="RunManager" selected="Node.js.makeHelpDoc.js">
     <configuration default="false" name="test.js" type="NodeJSConfigurationType" factoryName="Node.js" temporary="true" path-to-node="E:/Programs/nodejs/node" path-to-js-file="test.js" working-dir="$PROJECT_DIR$">
       <browser start="false" url="" with-js-debugger="false" />
       <RunnerSettings RunnerId="NodeJS.debug" />
       <RunnerSettings RunnerId="NodeJS.run" />
       <ConfigurationWrapper RunnerId="NodeJS.debug" />
-      <ConfigurationWrapper RunnerId="NodeJS.run" />
-      <method />
-    </configuration>
-    <configuration default="false" name="makeDoc.js" type="NodeJSConfigurationType" factoryName="Node.js" temporary="true" path-to-node="E:/Programs/nodejs/node" path-to-js-file="makeDoc.js" working-dir="$PROJECT_DIR$/doc">
-      <browser start="false" url="" with-js-debugger="false" />
-      <RunnerSettings RunnerId="NodeJS.run" />
       <ConfigurationWrapper RunnerId="NodeJS.run" />
       <method />
     </configuration>
@@ -309,12 +425,10 @@
       <ConfigurationWrapper RunnerId="NodeJS.run" />
       <method />
     </configuration>
-    <configuration default="true" type="DartUnitRunConfigurationType" factoryName="DartUnit">
-      <option name="VMOptions" />
-      <option name="arguments" />
-      <option name="filePath" />
-      <option name="scope" value="ALL" />
-      <option name="testName" />
+    <configuration default="false" name="makeHelpDoc.js" type="NodeJSConfigurationType" factoryName="Node.js" temporary="true" path-to-node="E:/Programs/nodejs/node" path-to-js-file="makeHelpDoc.js" working-dir="$PROJECT_DIR$/doc/help">
+      <browser start="false" url="" with-js-debugger="false" />
+      <RunnerSettings RunnerId="NodeJS.run" />
+      <ConfigurationWrapper RunnerId="NodeJS.run" />
       <method />
     </configuration>
     <configuration default="true" type="DartCommandLineRunConfigurationType" factoryName="Dart Command Line Application">
@@ -325,6 +439,14 @@
       <option name="saveOutputToFile" value="false" />
       <option name="showConsoleOnStdErr" value="false" />
       <option name="showConsoleOnStdOut" value="false" />
+      <method />
+    </configuration>
+    <configuration default="true" type="DartUnitRunConfigurationType" factoryName="DartUnit">
+      <option name="VMOptions" />
+      <option name="arguments" />
+      <option name="filePath" />
+      <option name="scope" value="ALL" />
+      <option name="testName" />
       <method />
     </configuration>
     <configuration default="true" type="JavaScriptTestRunnerKarma" factoryName="Karma" singleton="true" config-file="">
@@ -347,18 +469,18 @@
     <list size="6">
       <item index="0" class="java.lang.String" itemvalue="Node.js.bar.js" />
       <item index="1" class="java.lang.String" itemvalue="Node.js.test.js" />
-      <item index="2" class="java.lang.String" itemvalue="Node.js.makeDoc.js" />
-      <item index="3" class="java.lang.String" itemvalue="Node.js.index.js" />
-      <item index="4" class="java.lang.String" itemvalue="Node.js.config.js" />
-      <item index="5" class="java.lang.String" itemvalue="Node.js.fs-plus.js" />
+      <item index="2" class="java.lang.String" itemvalue="Node.js.index.js" />
+      <item index="3" class="java.lang.String" itemvalue="Node.js.config.js" />
+      <item index="4" class="java.lang.String" itemvalue="Node.js.fs-plus.js" />
+      <item index="5" class="java.lang.String" itemvalue="Node.js.makeHelpDoc.js" />
     </list>
     <recent_temporary>
       <list size="5">
-        <item index="0" class="java.lang.String" itemvalue="Node.js.index.js" />
-        <item index="1" class="java.lang.String" itemvalue="Node.js.test.js" />
-        <item index="2" class="java.lang.String" itemvalue="Node.js.fs-plus.js" />
-        <item index="3" class="java.lang.String" itemvalue="Node.js.config.js" />
-        <item index="4" class="java.lang.String" itemvalue="Node.js.makeDoc.js" />
+        <item index="0" class="java.lang.String" itemvalue="Node.js.makeHelpDoc.js" />
+        <item index="1" class="java.lang.String" itemvalue="Node.js.index.js" />
+        <item index="2" class="java.lang.String" itemvalue="Node.js.test.js" />
+        <item index="3" class="java.lang.String" itemvalue="Node.js.fs-plus.js" />
+        <item index="4" class="java.lang.String" itemvalue="Node.js.config.js" />
       </list>
     </recent_temporary>
   </component>
@@ -395,8 +517,9 @@
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32915717" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32801822" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.15953512" sideWeight="0.712984" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.15953512" sideWeight="0.67198175" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4328018" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32890365" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
@@ -405,7 +528,6 @@
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.32801822" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.39977852" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
@@ -428,135 +550,118 @@
           <option name="timeStamp" value="16" />
         </line-breakpoint>
       </breakpoints>
-      <option name="time" value="17" />
+      <option name="time" value="18" />
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/public/css/album.css">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="41" column="0" selection-start="701" selection-end="956" vertical-scroll-proportion="0.33333334" vertical-offset="630" max-vertical-offset="5170">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/doc/demo/public/css/album.css">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="228" column="1" selection-start="4593" selection-end="4593" vertical-scroll-proportion="0.94799054" vertical-offset="4214" max-vertical-offset="5148">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/public/css/index.css">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="41" column="0" selection-start="701" selection-end="806" vertical-scroll-proportion="0.33333334" vertical-offset="630" max-vertical-offset="3212">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/doc/demo/index.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="161" column="74" selection-start="6198" selection-end="6198" vertical-scroll-proportion="-4.2131147" vertical-offset="3285" max-vertical-offset="10912">
-          <folding>
-            <element signature="n#style#0;n#span#0;n#a#0;n#li#1;n#ul#0;n#div#1;n#nav#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#span#0;n#a#0;n#li#3;n#ul#0;n#div#1;n#nav#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#ul#1;n#div#1;n#nav#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#button#1;n#div#1;n#form#0;n#li#1;n#ul#1;n#div#1;n#nav#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#li#2;n#ul#1;n#div#1;n#nav#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-            <marker date="1394466703420" expanded="true" signature="-1:-1" placeholder="..." />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/doc/demo/public/css/index.css">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="138" column="29" selection-start="2558" selection-end="2558" vertical-scroll-proportion="-25.0" vertical-offset="2286" max-vertical-offset="3190">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/views/css/style.styl">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="42" column="28" selection-start="694" selection-end="694" vertical-scroll-proportion="0.66193855" vertical-offset="364" max-vertical-offset="1210">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/doc/demo/gallery-not-writable.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="385" column="45" selection-start="13588" selection-end="13588" vertical-scroll-proportion="0.37196764" vertical-offset="8194" max-vertical-offset="12034">
-          <folding>
-            <element signature="n#style#0;n#span#0;n#a#0;n#li#1;n#ul#0;n#div#1;n#nav#0;n#header#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#span#0;n#a#0;n#li#3;n#ul#0;n#div#1;n#nav#0;n#header#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#ul#1;n#div#1;n#nav#0;n#header#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#div#1;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#div#3;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/doc/demo/public/javascripts/song-demo.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="-0.6241135" vertical-offset="528" max-vertical-offset="14146">
-          <folding>
-            <marker date="1394462509792" expanded="false" signature="-1:-1" placeholder="..." />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/views/album/header.ejs">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="23" column="33" selection-start="842" selection-end="867" vertical-scroll-proportion="0.6208589" vertical-offset="0" max-vertical-offset="815">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="846">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/views/album/footer.ejs">
+    <entry file="file://$PROJECT_DIR$/views/index/index.ejs">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="52" column="15" selection-start="2027" selection-end="2027" vertical-scroll-proportion="-36.903225" vertical-offset="0" max-vertical-offset="4708">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="846">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/views/index/header.ejs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="-0.10674847" vertical-offset="87" max-vertical-offset="902">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/views/index/item.ejs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="846">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/node_modules/i18n/package.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="36" column="859" selection-start="1565" selection-end="1565" vertical-scroll-proportion="0.35214007" vertical-offset="611" max-vertical-offset="1188">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/views/index/navibar.ejs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="38" column="29" selection-start="2410" selection-end="2410" vertical-scroll-proportion="0.64907974" vertical-offset="307" max-vertical-offset="1122">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/views/album/navibar.ejs">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="12" column="56" selection-start="826" selection-end="826" vertical-scroll-proportion="0.20448878" vertical-offset="100" max-vertical-offset="902">
+        <state line="32" column="110" selection-start="1947" selection-end="1947" vertical-scroll-proportion="0.6760736" vertical-offset="153" max-vertical-offset="968">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/views/index/breadcrumb.ejs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="11" column="33" selection-start="421" selection-end="421" vertical-scroll-proportion="0.29693252" vertical-offset="0" max-vertical-offset="815">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/views/album/item.ejs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="37" column="14" selection-start="1264" selection-end="1264" vertical-scroll-proportion="0.0" vertical-offset="254" max-vertical-offset="1100">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/doc/locales/zh.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="24" column="24" selection-start="560" selection-end="606" vertical-scroll-proportion="-17.032259" vertical-offset="0" max-vertical-offset="682">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/doc/locales/en.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="23" column="14" selection-start="725" selection-end="735" vertical-scroll-proportion="-16.32258" vertical-offset="0" max-vertical-offset="682">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/routes/index.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="119" column="15" selection-start="3069" selection-end="3069" vertical-scroll-proportion="1.1182033" vertical-offset="1672" max-vertical-offset="6094">
-          <folding>
-            <element signature="n#!!doc" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/lib/fs-plus.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="146" column="24" selection-start="4174" selection-end="4174" vertical-scroll-proportion="0.20803782" vertical-offset="3036" max-vertical-offset="4136">
+        <state line="70" column="23" selection-start="2151" selection-end="2151" vertical-scroll-proportion="0.0" vertical-offset="958" max-vertical-offset="7766">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/lib/config.js">
+    <entry file="file://$PROJECT_DIR$/views/album/footer.ejs">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="4" column="32" selection-start="119" selection-end="119" vertical-scroll-proportion="0.10401891" vertical-offset="0" max-vertical-offset="846">
+        <state line="177" column="93" selection-start="6057" selection-end="6057" vertical-scroll-proportion="0.40613496" vertical-offset="3563" max-vertical-offset="4642">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/README.md">
+    <entry file="file://$PROJECT_DIR$/views/index/footer.ejs">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="115" column="31" selection-start="3751" selection-end="3751" vertical-scroll-proportion="3.037215" vertical-offset="0" max-vertical-offset="4422">
+        <state line="116" column="32" selection-start="4637" selection-end="4637" vertical-scroll-proportion="-82.32258" vertical-offset="0" max-vertical-offset="3894">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/lib/config/config.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="19" column="12" selection-start="555" selection-end="555" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="660">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/package.json">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="2" column="19" selection-start="44" selection-end="44" vertical-scroll-proportion="0.05398773" vertical-offset="0" max-vertical-offset="1232">
+        <state line="2" column="18" selection-start="43" selection-end="43" vertical-scroll-proportion="0.05398773" vertical-offset="0" max-vertical-offset="1232">
           <folding />
         </state>
       </provider>

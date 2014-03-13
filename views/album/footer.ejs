@@ -24,7 +24,7 @@
 <script>
 $(function () {
 
-    // 显示图片属性信息
+    // show image properties
     $('.img-meta a').click(function(e) {
         $(this).next('.img-metabg').toggleClass('img-metabg-open');
         e.preventDefault();
@@ -61,11 +61,11 @@ $(function () {
     }).on('deleteSelectFail', function (e) {
         $('#delete-modal').modal('hide');
     }).on('deleteOneSuccess', function () {
-        // 由于删除特效hide有延时
+        // delay for the delete animation
         setTimeout(function() { itemScroll.refresh(); }, 550);
     });
 
-    // 显示图片操作按钮
+    // show delete button
     $('.img-item').hover(function () {
         var $this = $(this);
         $this.find('.img-opr').show();
@@ -91,14 +91,12 @@ $(function () {
     });
 
 
-    // 计数牌，显示当前屏幕所对应的图片时第几张
     var itemScroll = new ItemScroll({
         selector: selector.item,
         badge_sel: '#img-nav-board',
         margin: 30
     });
 
-    // 必须等图片加载完毕后才能执行refresh，否则offset属性不可获取
     $(window).load(function () {
         itemScroll.refresh();
     });
@@ -112,16 +110,15 @@ $(function () {
     function () {
         $(this).children('.nav').hide();
     });
-    // 初始化页号
+
     var pn = location.search.match(/pn=(\d+)/);
     pn = pn ? pn[1] : 1;
     $('#img-nav-pn').text(pn);
-    // 跳转到上一张图片
+    
     $('#img-nav-pre').click(function (e) {
         itemScroll.scrollN(-1);
         e.preventDefault();
     });
-    // 下一张
     $('#img-nav-next').click(function (e) {
         itemScroll.scrollN(1);
         e.preventDefault();
@@ -150,7 +147,7 @@ $(function () {
         location.assign(redirectUrl);
     });
 
-    // 跳转到第N张图片
+    // jump to Nth page Mth image
     $("#jump-to-item button").click(function (e) {
         e.preventDefault();
 
@@ -178,7 +175,7 @@ $(function () {
         if (hasError || itemScroll.scrollToN(num) === false) {
             var $pop = $(popEle);
             $pop.attr({
-                'data-content': '页数范围: ' + '1-' + pnMax + '  图片数范围: ' + '1-' + selectItems.itemTotal,
+                'data-content': '<%= __('Page range') %>: ' + '1-' + pnMax + '  <%= __('Image range') %>: ' + '1-' + selectItems.itemTotal,
                 'data-placement': "bottom"
             }).popover('show');
 

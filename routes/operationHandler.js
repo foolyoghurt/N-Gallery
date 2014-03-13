@@ -1,275 +1,273 @@
 /*
- * To dealing with Ajax request
+ * Dealing with Ajax request
+ * @module routes/operationHandler
+ * ============================
+ * 
+ * For the delete operation on directory of three different types, each of which is different
+ * 
+ * "album": delete the images in it directly
+ * "folder": delete recursively, so sub dirs will be deleted too
+ * "root": delete just the images in it, sub dirs will be reserved
+ * 
  */
 
 var fs = require('fs.extra');
+var util = require('util');
 var fsPlus = require('../lib/fs-plus');
 var path = require('path');
 var log = require('../lib/logger');
-var conf = require('../lib/config');
+var conf = require('../lib/config').config;
 
-var r_img = /(\.jpg|\.jpeg|\.gif|\.png)$/i;
-var error_msg = {
+var reImgType = /(\.jpg|\.jpeg|\.gif|\.png)$/i;
+var errorMsg = {
   0: 'Unknown error',
-  1: 'No permission to do this',
-  2: 'File path is not valid',
+  1: 'No permission',
+  2: 'File path not valid',
   3: 'Delete Failed',
   4: 'Move File Failed',
-  5: 'Configuration Error, check the config file'
+  5: 'Configuration Error, check out the config file'
 };
 
 exports.operationHandler = function (req, res) {
 
-  // check the permission
-  var white_list = conf.ip_white_list;
+  var ret;
+  var whiteList = conf.ip_white_list;
   var address = req.connection.remoteAddress;
-  if (white_list.indexOf(address) == -1) {
-    res.send({status: 'ERROR', msg: error_msg[1]});
+  
+  // check the permission
+    if (whiteList.indexOf(address) == -1) {
+    res.send({status: 'ERROR', msg: errorMsg[1]});
     log('Request from ' + address + ' was rejected!', 'fail');
-    return
+    return;
   }
 
 
-  // 删除单个文件
-  var pic_path = req.query['pic_path'];
-  var ret = {};
-  if (pic_path) {
+  // delete one image
+  if (req.query['pic_path']) {
+    ret = deleteImgs(req.query['pic_path']);
     
-    // delete mode
-    if (conf.delete_mode == 'del') {
-      try {
-        fs.unlinkSync(pic_path);
-        ret = {status: 'OK'};
-        log(pic_path, 'delete');
-      } catch (e) {
-        ret = {status: 'ERROR', msg: error_msg[3], err: e};
-      }
-    } 
+  } else if (req.query['pics_path']) {
+    ret = deleteImgs(JSON.parse(req.query['pics_path']));
     
-    // move mode
-    else if (conf.delete_mode == 'mv') {
-      var tmpDir = conf.tmp_dir;
-      var fileName = path.basename(pic_path);
-      var dirName = toLinuxPath(path.dirname(pic_path)).replace(/\//g, '$').replace(':', '$$');
-      if (!fs.existsSync(path.join(tmpDir, dirName))) {
-        fs.mkdirRecursiveSync(path.join(tmpDir, dirName));
-      }
-      try {
-        var destPath = path.join(tmpDir, dirName, fileName);
-        //fs.renameSync(pic_path, destPath);
-        fsPlus.moveSync(pic_path, path.join(tmpDir, dirName));
-        ret = {status: 'OK'};
-        log(pic_path + ' => ' + destPath, 'move');
-      } catch (e) {
-        ret = {status: 'ERROR', msg: error_msg[4], err: e};
-      }
-    } else {
-      ret = {status: 'ERROR', msg: error_msg[5]};
-    }
+  } else if (req.query['albums']) {
+    ret = deleteDirs(JSON.parse(req.query['albums']))
     
-    res.send(ret);
-    if (ret.status == 'ERROR') {
-      if (ret.err) {
-        log(ret.err, 'error');
-      }
-      log(ret.msg, 'error');
-    }
-    
-    return;
-    
+  } else if (req.query['album_base_dir']) {
+    var mode = req.query['mode'];
+    ret = changeGalleryBaseDir(req.query['album_base_dir'], mode);    
   }
   
+  res.send(ret);
   
-  // 删除多个文件
-  var pics_path = req.query['pics_path'];
-  var ret = {};
-  if (pics_path) {
-    
-    var pics = JSON.parse(pics_path);
-
-    // delete mode
-    if (conf.delete_mode == 'del') {
-      for (var i = 0; i < pics.length; i++) {
-        try {
-          fs.unlinkSync(pics[i]);
-          ret = {status: 'OK'};
-          log(pics[i], 'delete');
-        } catch (e) {
-          ret = {status: 'ERROR', msg: error_msg[3], err: e};
-        }
-      }
-    } 
-    
-    // move mode
-    else if (conf.delete_mode == 'mv') {
-      var tmpDir = conf.tmp_dir;
-      var dirName = toLinuxPath(path.dirname(pics[0])).replace(/\//g, '$').replace(':', '$$');
-      if (!fs.existsSync(path.join(tmpDir, dirName))) {
-        fs.mkdirRecursiveSync(path.join(tmpDir, dirName));
-      }
-      try {
-        pics.forEach(function(picPath) {
-          var fileName = path.basename(picPath);
-          var destPath = path.join(tmpDir, dirName, fileName);
-          //fs.renameSync(picPath, destPath);
-          fsPlus.moveSync(picPath, path.join(tmpDir, dirName));
-          log(picPath + ' => ' + destPath, 'move');
-        });
-        ret = {status: 'OK'};
-      } catch (e) {
-        ret = {status: 'ERROR', msg: error_msg[4], err: e};
-      }
-      
-    } else {
-      ret = {status: 'ERROR', msg: error_msg[5]};
+  if (ret.status == 'ERROR') {
+    if (ret.err) {
+      log(ret.err, 'error');
     }
-
-    res.send(ret);
-    if (ret.status == 'ERROR') {
-      if (ret.err) {
-        log(ret.err, 'error');
-      }
-      log(ret.msg, 'error');
-    }
-    
-    return;
-    
+    log(ret.msg, 'error');
   }
 
-
-  // 删除多个文件夹
-  var albums = req.query['albums'];
-  var ret = {status: 'OK'};
-  if (albums) {
-    JSON.parse(albums).forEach(function (album) {
-
-      var alb_path = album.path;
-      var alb_type = album.type;
-
-      if (alb_type == 'album' || alb_type == 'folder') {
-        
-        // delete mode
-        if (conf.delete_mode == 'del') {
-          try {
-            fs.rmrfSync(alb_path);
-            log('FOLDER: ' + alb_path, 'delete');
-          } catch (e) {
-            ret = {status: 'ERROR', msg: error_msg[3], err: e};
-          }
-        }
-
-        // move mode
-        else if (conf.delete_mode == 'mv') {
-          var tmpDir = conf.tmp_dir;
-          var dirName = toLinuxPath(alb_path).replace(/\//g, '$').replace(':', '$$');
-          if (!fs.existsSync(tmpDir)) {
-            fs.mkdirRecursiveSync(tmpDir);
-          }
-          try {
-            var destPath = path.join(tmpDir, dirName);
-            //fs.renameSync(alb_path, destPath);
-            fsPlus.moveSync(alb_path, destPath);
-            log('FOLDER: ' + alb_path + ' => ' + destPath, 'move');
-          } catch (e) {
-            ret = {status: 'ERROR', msg: error_msg[4], err: e};
-          }
-
-        } else {
-          ret = {status: 'ERROR', msg: error_msg[5]};
-        }
-
-      } 
-            
-      else if (alb_type == 'root') {
-
-        var files = fs.readdirSync(alb_path);        
-
-        // delete mode
-        if (conf.delete_mode == 'del') {
-          try {
-            files.forEach(function (file) {
-              var file_path = path.join(alb_path, file);
-              if (fs.statSync(file_path).isFile() && r_img.test(file)) {
-                fs.unlinkSync(file_path);
-                log(file_path, 'delete');
-              }
-            });
-          } catch (e) {
-            ret = {status: 'ERROR', msg: error_msg[4]};
-          }
-        }
-
-        // move mode
-        else if (conf.delete_mode == 'mv') {
-          var tmpDir = conf.tmp_dir;
-          var dirName = toLinuxPath(alb_path).replace(/\//g, '$').replace(':', '$$');
-          var destDirPath = path.join(tmpDir, dirName);
-
-          if (!fs.existsSync(destDirPath)) {
-            fs.mkdirRecursiveSync(destDirPath);
-          }
-          
-          try {
-            files.forEach(function(file) {
-              var src = path.join(alb_path, file);
-              var dest = path.join(destDirPath, file);
-              if (fs.statSync(src).isFile() && r_img.test(file)) {
-                fsPlus.moveSync(src, destDirPath);
-                log(src + ' => ' + dest, 'move');
-              }
-            });
-          } catch (e) {
-            ret = {status: 'ERROR', msg: error_msg[4]};
-          }
-        } else {
-          ret = {status: 'ERROR', msg: error_msg[5]};
-        }
-      }
-        
-    });
-
-    res.send(ret);
-    if (ret.status == 'ERROR') {
-      if (ret.err) {
-        log(ret.err, 'error');
-      }
-      log(ret.msg, 'error');
-    }
-
-    return;
-
-  }
-
-
-  // 更改/添加相册根目录
-  var album_base_dir = req.query['album_base_dir'],
-    mode = req.query['mode'];
-
-  if (album_base_dir) {
-    if (fs.existsSync(album_base_dir) && fs.statSync(album_base_dir).isDirectory()) {
-      switch (mode) {
-        case 'add-path':
-          if (conf.album_base_dirs.indexOf(album_base_dir) == -1) {
-            conf.album_base_dirs.push(album_base_dir);
-          }
-          break;
-        default :
-          conf.album_base_dirs = [album_base_dir];
-          break;
-      }
-      log('相册根目录已改变：' + conf.album_base_dirs, 'update');
-      res.send({status: 'OK'});
-    } else {
-      log(error_msg[2] + ': ' + album_base_dir, 'fail');
-      res.send({status: "ERROR", msg: error_msg[2] + ': ' + album_base_dir});
-    }
-    return;
-  }
 };
 
 
-// For Windows path
-function toLinuxPath(p) {
-  return p.replace(/\\/g, '/').replace(/\/$/, '');
+/**
+ * Delete images
+ * @param picsPath {[string] | string}
+ * @returns {{status: string, msg: string, err: Error}}
+ */
+function deleteImgs(picsPath) {
+
+  var ret = {};
+
+  if (typeof picsPath === 'string') {
+    picsPath = [picsPath];
+  } else if (!util.isArray(picsPath) || !picsPath.length) {
+    throw new Error('Argument type error, should be array or string');
+  }
+
+  // delete mode
+  if (conf.delete_mode == 'del') {
+    for (var i = 0; i < picsPath.length; i++) {
+      try {
+        fs.unlinkSync(picsPath[i]);
+        ret = {status: 'OK'};
+        log(picsPath[i], 'delete');
+      } catch (e) {
+        ret = {status: 'ERROR', msg: errorMsg[3], err: e};
+      }
+    }
+  }
+
+  // move mode
+  else if (conf.delete_mode == 'mv') {
+    var tmpDir = conf.tmp_dir;
+    var dirName = fsPlus.toLinuxPath(path.dirname(picsPath[0])).replace(/\//g, '$').replace(':', '$$');
+    if (!fs.existsSync(path.join(tmpDir, dirName))) {
+      fs.mkdirRecursiveSync(path.join(tmpDir, dirName));
+    }
+    try {
+      picsPath.forEach(function (picPath) {
+        var fileName = path.basename(picPath);
+        var destPath = path.join(tmpDir, dirName, fileName);
+        fsPlus.moveSync(picPath, path.join(tmpDir, dirName));
+        log(picPath + ' => ' + destPath, 'move');
+      });
+      ret = {status: 'OK'};
+    } catch (e) {
+      ret = {status: 'ERROR', msg: errorMsg[4], err: e};
+    }
+
+  } else {
+    ret = {status: 'ERROR', msg: errorMsg[5]};
+  }
+
+  return ret;
+
 }
 
+
+/**
+ * Delete multiple directories recursively
+ * @param dirs {[{path: string, type: string}] | {path: string, type: string}}
+ * @returns {{status: string, msg: string, err: Error}}
+ */
+function deleteDirs(dirs) {
+
+  var ret = {status: 'OK'};
+
+  if (!util.isArray(dirs) && typeof dirs === 'object') {
+    dirs = [dirs];
+  } else if (!util.isArray(dirs) || !dirs.length) {
+    throw new Error('Argument type error, should be array or object');
+  }
+
+  dirs.forEach(function (dir) {
+
+    var dirPath = dir.path;
+    var dirType = dir.type;
+    var tmpDir;
+    var dirName;
+
+    if (dirType == 'album' || dirType == 'folder') {
+
+      // delete mode
+      if (conf.delete_mode == 'del') {
+        try {
+          fs.rmrfSync(dirPath);
+          log('FOLDER: ' + dirPath, 'delete');
+        } catch (e) {
+          ret = {status: 'ERROR', msg: errorMsg[3], err: e};
+        }
+      }
+
+      // move mode
+      else if (conf.delete_mode == 'mv') {
+        tmpDir = conf.tmp_dir;
+        dirName = fsPlus.toLinuxPath(dirPath).replace(/\//g, '$').replace(':', '$$');
+        if (!fs.existsSync(tmpDir)) {
+          fs.mkdirRecursiveSync(tmpDir);
+        }
+        try {
+          var destPath = path.join(tmpDir, dirName);
+          fsPlus.moveSync(dirPath, destPath);
+          log('FOLDER: ' + dirPath + ' => ' + destPath, 'move');
+        } catch (e) {
+          ret = {status: 'ERROR', msg: errorMsg[4], err: e};
+        }
+
+      } else {
+        ret = {status: 'ERROR', msg: errorMsg[5]};
+      }
+
+    }
+
+    // just delete the images of directory, sub dirs will be reserved
+    else if (dirType == 'root') {
+
+      var files = fs.readdirSync(dirPath);
+
+      // delete mode
+      if (conf.delete_mode == 'del') {
+        try {
+          files.forEach(function (file) {
+            var file_path = path.join(dirPath, file);
+            if (fs.statSync(file_path).isFile() && reImgType.test(file)) {
+              fs.unlinkSync(file_path);
+              log(file_path, 'delete');
+            }
+          });
+        } catch (e) {
+          ret = {status: 'ERROR', msg: errorMsg[4]};
+        }
+      }
+
+      // move mode
+      else if (conf.delete_mode == 'mv') {
+        tmpDir = conf.tmp_dir;
+        dirName = fsPlus.toLinuxPath(dirPath).replace(/\//g, '$').replace(':', '$$');
+        var destDirPath = path.join(tmpDir, dirName);
+
+        if (!fs.existsSync(destDirPath)) {
+          fs.mkdirRecursiveSync(destDirPath);
+        }
+
+        try {
+          files.forEach(function (file) {
+            var src = path.join(dirPath, file);
+            var dest = path.join(destDirPath, file);
+            if (fs.statSync(src).isFile() && reImgType.test(file)) {
+              fsPlus.moveSync(src, destDirPath);
+              log(src + ' => ' + dest, 'move');
+            }
+          });
+        } catch (e) {
+          ret = {status: 'ERROR', msg: errorMsg[4]};
+        }
+      } else {
+        ret = {status: 'ERROR', msg: errorMsg[5]};
+      }
+    }
+
+  });
+
+  return ret;
+
+}
+
+
+/**
+ * Change/add gallery base directory
+ * @param baseDir {string}
+ * @param mode {string}
+ * @returns {{status: string, msg: string, err: Error}}
+ */
+function changeGalleryBaseDir(baseDir, mode) {
+
+  var ret = {status: 'OK'};
+
+  if (fs.existsSync(baseDir) && fs.statSync(baseDir).isDirectory()) {
+    
+    if (mode == 'add-path') {
+      var noDuplicate = conf.album_base_dirs.every(function (dir) {
+        return fsPlus.toLinuxPath(dir) !== fsPlus.toLinuxPath(baseDir);
+      });
+
+      if (noDuplicate) {
+        conf.album_base_dirs.push(baseDir);
+      } else {
+        log('Same gallery base dir "' + baseDir + '" already exists');
+      }
+      
+    } else if (mode == 'set-path') {
+      conf.album_base_dirs = [baseDir];
+    }
+    
+    log('Gallery base dir has been changed to: ' + conf.album_base_dirs, 'update');
+    
+  } else {
+    log(errorMsg[2] + ': ' + baseDir, 'fail');
+    ret = {status: "ERROR", msg: errorMsg[2] + ': ' + baseDir};
+  }
+  
+  return ret;
+
+}

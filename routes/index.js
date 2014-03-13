@@ -1,15 +1,37 @@
 /*
- * GET home page.
+ * GET galleries display page.
+ * @module routes/index
+ * ==============
+ * 
+ * Every local directory that passed in is considered as a "gallery base dir"
+ * 
+ * Each sub directory in under "gallery base dir" are considered as a gallery classified to three types
+ * "album": alias gallery, a directory in which there are just images (no sub directories)
+ * "folder": a directory in which there exists sub directories
+ * "root": in fact it's the "gallery base dir" itself, the difference is that "root" directory exclude
+ * the sub directories in "gallery base dir" so it only contains images in it
+ * 
+ * For instance: A is a "gallery base dir", B and C are sub dirs in it, 
+ * there's a images A.jpg in A rather than in B or C. 
+ * B has just images while C has both images and sub dirs. 
+ * Thus, A is "root" with A.jpg in it, B is "album", C is "folder". 
+ * 
  */
 
 var fs = require('fs');
 var fsPlus = require('../lib/fs-plus');
 var path = require('path');
 var imgSize = require('image-size');
-var conf = require('../lib/config');
+var conf = require('../lib/config').config;
 var log = require('../lib/logger');
 var reImgType = /(\.jpg|\.jpeg|\.gif|\.png)$/i;
 
+
+/**
+ * Home page
+ * @param req
+ * @param res
+ */
 exports.index = function index(req, res) {
 
   var items = [];
@@ -18,7 +40,8 @@ exports.index = function index(req, res) {
   baseDirs.forEach(function(baseDir) {
     Array.prototype.push.apply(items, folderHandler(baseDir));
   });
-  conf.lang && res.setLocale(conf.lang);
+
+  res.setLocale(conf.lang);
 
   if (!items.length) {
     var dirs = conf.album_base_dirs;
@@ -35,11 +58,32 @@ exports.index = function index(req, res) {
     return;
   }
   
-  res.render('index', {title: res.__('首页'), items: items, base_dirs: baseDirs, config: conf, _blank: true});
+  var helpDir = __dirname + '/../doc/help';
+  var helpFile;
+  if (fs.existsSync(helpDir + '/help-' + conf.lang + '.ejs')) {
+    helpFile = 'help-' + conf.lang + '.ejs';
+  } else {
+    helpFile = 'help.ejs';
+  }
+  var helpDoc = fs.readFileSync(helpDir + '/' + helpFile);
+  
+  res.render('index', {
+    title: res.__('Home'), 
+    items: items, 
+    base_dirs: baseDirs, 
+    config: conf, 
+    help_doc: helpDoc, 
+    _blank: true
+  });
 
 };
 
 
+/**
+ * Gallery items display page
+ * @param req
+ * @param res
+ */
 exports.folder = function (req, res) {
 
   var folder  = fsPlus.toLinuxPath(req.params[0]);
@@ -77,18 +121,39 @@ exports.folder = function (req, res) {
     };
   }
 
-  conf.lang && res.setLocale(conf.lang);
+  res.setLocale(conf.lang);
 
   if (!items.length) {
     res.render('404', {content: 'Nothing Found!', config: conf});
     return;
   }
 
-  res.render('index', {title: title, items: items, config: conf, breadcrumb: breadcrumb, _blank: false})
+  var helpDir = __dirname + '/../doc/help';
+  var helpFile;
+  if (fs.existsSync(helpDir + '/help-' + conf.lang + '.ejs')) {
+    helpFile = 'help-' + conf.lang + '.ejs';
+  } else {
+    helpFile = 'help.ejs';
+  }
+  var helpDoc = fs.readFileSync(helpDir + '/' + helpFile);
+  
+  res.render('index', {
+    title: title, 
+    items: items, 
+    config: conf, 
+    breadcrumb: breadcrumb,
+    help_doc: helpDoc,
+    _blank: false
+  });
 
 };
 
 
+/**
+ * Gallery(images) display page
+ * @param req
+ * @param res
+ */
 exports.album = function (req, res) {
 
   var album = req.params[0];
@@ -105,6 +170,15 @@ exports.album = function (req, res) {
     res.render('404', {content: 'No Images Found!', config: conf});
     return;
   }
+
+  var helpDir = __dirname + '/../doc/help';
+  var helpFile;
+  if (fs.existsSync(helpDir + '/help-' + conf.lang + '.ejs')) {
+    helpFile = 'help-' + conf.lang + '.ejs';
+  } else {
+    helpFile = 'help.ejs';
+  }
+  var helpDoc = fs.readFileSync(helpDir + '/' + helpFile);
   
   res.render('album', {
     title: title,
@@ -117,11 +191,18 @@ exports.album = function (req, res) {
 
     // total page number, current page number
     page: {total: Math.ceil(result[1] / countPerPage), number: pn}, 
-    config: conf
+    config: conf,
+    help_doc: helpDoc
   });
 
 };
 
+
+/**
+ * Dealing with static resource
+ * @param req
+ * @param res
+ */
 exports.local = function (req, res) {
 
   // file path
@@ -132,6 +213,11 @@ exports.local = function (req, res) {
 exports.operationHandler = require('./operationHandler').operationHandler;
 
 
+/**
+ * Get sub folder items of a gallery base directory
+ * @param baseDir {string}
+ * @returns {Array}
+ */
 function folderHandler(baseDir) {
 
   if (!fs.existsSync(baseDir) || !fs.statSync(baseDir).isDirectory()) {
@@ -181,9 +267,10 @@ function folderHandler(baseDir) {
           }
         }
 
+        // empty gallery
         if (!imgCount) {
 
-          // 根目录下面没有图片
+          // check if it is root gallery 
           if (i == files.length - 1) {
             continue;
           }
@@ -227,13 +314,20 @@ function folderHandler(baseDir) {
 }
 
 
-function albumHandler(album, pn, countPerPage) {
+/**
+ * Get the image items of a gallery 
+ * @param dirPath {string} - gallery directory absolute path
+ * @param pn {number} - page number
+ * @param countPerPage {number}
+ * @returns {[[], number]}
+ */
+function albumHandler(dirPath, pn, countPerPage) {
 
-  if (!fs.existsSync(album) || !fs.statSync(album).isDirectory()) {
+  if (!fs.existsSync(dirPath) || !fs.statSync(dirPath).isDirectory()) {
     return [];
   }
 
-  var files = fs.readdirSync(album);
+  var files = fs.readdirSync(dirPath);
   var items = [];
   var start = 0;
   var end = files.length;
@@ -246,7 +340,7 @@ function albumHandler(album, pn, countPerPage) {
   for (var i = start; i < end; i++) {
     if (reImgType.test(files[i])) {
       var item = {};
-      var src = path.join(album, files[i]);
+      var src = path.join(dirPath, files[i]);
       item['src'] = fsPlus.toLinuxPath('local/' + src);
       var stat = fs.statSync(src);
       try {
